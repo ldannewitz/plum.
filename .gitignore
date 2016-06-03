@@ -11,3 +11,13 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore schema
+schema.rb
+
+# Ignore SimpleCov
+coverage
+
+.DS_Store
+app/.DS_Store
+.env

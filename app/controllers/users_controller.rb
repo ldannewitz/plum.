@@ -22,7 +22,8 @@ class UserController < ApplicationController
   end
 
   def new_event
-    @event = Event.new(event_params)
+    # got this from active_model_serializers GitHub
+    Event.create(event_params) # or .new?
 
     ## What do we send back here???
 
@@ -34,8 +35,8 @@ class UserController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
+    # got this from active_model_serializers GitHub
+    User.create(user_params) # or .new?
 
     ## What do we send back here???
 
@@ -50,11 +51,19 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone)
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:first_name, :last_name, :email, :password, :phone])
   end
 
+  # def user_params
+  #   params.require(:user).permit(:first_name, :last_name, :email, :password, :phone)
+  # end
+
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name, :start_date, :end_date, :settled?, :group_id, :total])
   end
+
+  # def event_params
+  #   params.require(:event).permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
+  # end
 
 end

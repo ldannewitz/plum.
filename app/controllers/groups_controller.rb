@@ -1,6 +1,9 @@
 class GroupsController < ApplicationController
   def create
-    @group = Group.new(group_params)
+    # @group = Group.new(group_params)
+
+    # got this from active_model_serializers GitHub
+    Group.create(group_params) # or .new?
 
     ## What do we send back here???
 
@@ -39,6 +42,10 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name)
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name])
   end
+
+  # def group_params
+  #   params.require(:group).permit(:name)
+  # end
 end

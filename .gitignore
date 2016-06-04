@@ -15,3 +15,13 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore schema
+schema.rb
+
+# Ignore SimpleCov
+coverage
+
+.DS_Store
+app/.DS_Store
+.env

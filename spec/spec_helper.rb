@@ -1,12 +1,11 @@
 require 'simplecov'
+require 'coveralls'
 
-# require 'coveralls'
-#
-# SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-#   SimpleCov::Formatter::HTMLFormatter,
-#   Coveralls::SimpleCov::Formatter
-# ]
-#
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+
 SimpleCov.start do
   load_profile 'rails'
   coverage_dir 'coverage'

@@ -1,5 +1,5 @@
 # plum-app
-### plum API
+### plum API  [![Build Status](https://travis-ci.org/ldannewitz/plum..svg?branch=master)](https://travis-ci.org/ldannewitz/plum.) [![Coverage Status](https://coveralls.io/repos/github/ldannewitz/plum./badge.svg?branch=master)](https://coveralls.io/github/ldannewitz/plum.?branch=master)
 
 [Mobile framework for plum](https://github.com/jbkaplan/plum-app)
 

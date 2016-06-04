@@ -5,5 +5,5 @@ class Event < ActiveRecord::Base
   has_many :expenses
   has_many :invoices
 
-  validates :name, :start, :end, :settled?, :group_id, :total, presence: true
+  validates :name, :start_date, :end_date, :group_id, :total, presence: true
 end

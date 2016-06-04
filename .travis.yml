@@ -1,0 +1,12 @@
++language: ruby
+ +rvm:
+ + - 2.2.4
+ +env:
+ + - DB=postgresql
+ +script:
+ + - bundle exec rspec
+ +before_script:
+ + - bundle exec rake db:create RAILS_ENV=test
+ + - bundle exec rake db:migrate
+ + - bundle exec rake db:migrate RAILS_ENV=test
+ +bundler_args: --binstubs=./bundler_stubs

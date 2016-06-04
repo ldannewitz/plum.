@@ -1,9 +1,9 @@
 require_relative '../rails_helper'
 
 describe 'User' do
-  let!(:user) { User.create!(first_name: 'Lisa', last_name: 'D', email: 'email@email.com', password: 'password', phone: '800-123-4567')}
-  let!(:group) { Group.create!(name: 'Friends')}
-  let!(:membership) { Membership.create!(member_id: user.id, group: group) }
+  # let!(:user) { User.create!(first_name: 'Lisa', last_name: 'D', email: 'email@email.com', password: 'password', phone: '800-123-4567')}
+  # let!(:group) { Group.create!(name: 'Friends')}
+  # let!(:membership) { Membership.create!(member_id: user.id, group: group) }
 
   it 'has a first name' do
     should { validate_presence_of(:first_name) }

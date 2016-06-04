@@ -18,6 +18,11 @@ schema.rb
 # Ignore SimpleCov
 coverage
 
+# Ignore Coveralls
+.coveralls.yml
+
 .DS_Store
 app/.DS_Store
 .env
+database.yml
+config/database.yml

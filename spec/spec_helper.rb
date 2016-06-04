@@ -1,8 +1,15 @@
 require 'simplecov'
+require 'coveralls'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+
 SimpleCov.start do
   load_profile 'rails'
   coverage_dir 'coverage'
-  add_filter "/app/controllers/application_controller.rb" 
+  add_filter "/app/controllers/application_controller.rb"
   add_group "Models", "app/models"
   add_group "Controllers", "app/controllers"
 end

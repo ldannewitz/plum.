@@ -1,24 +1,11 @@
-# README
+# plum-app
+### plum API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Mobile framework for plum](https://github.com/jbkaplan/plum-app)
 
-Things you may want to cover:
+Contributors:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Brad Lindgren - [bplindgren](https://github.com/bplindgren)
+* Jonathan Kaplan - [jbkaplan](https://github.com/jbkaplan)
+* Lisa Dannewitz - [ldannewitz](https://github.com/ldannewitz)
+* Tomasz Sok - [tomsapps](https://github.com/tomsapps)

@@ -44,5 +44,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test do
   gem 'faker'
-  gem 'shoulda-matchers', '~> 3.1', require: false
+  gem 'shoulda-matchers', '~> 3.1.1'
 end

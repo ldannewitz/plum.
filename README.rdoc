@@ -1,4 +1,4 @@
-== SettleUp {<img src="https://travis-ci.org/ldannewitz/settleup.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ldannewitz/settleup]
+== SettleUp {<img src="https://travis-ci.org/ldannewitz/settleup.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ldannewitz/settleup] {<img src="https://coveralls.io/repos/github/ldannewitz/settleup/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/ldannewitz/settleup?branch=master]
 
 Contributors:
 

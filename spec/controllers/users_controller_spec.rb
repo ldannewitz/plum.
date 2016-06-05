@@ -17,9 +17,9 @@ RSpec.describe UsersController, :type => :controller do
 
     it "should render JSON user serializer" do
       users = User.all
-      user = User.first
+      # user = User.first
       get :index
-      expect(response).to serialize_object(user).with(UserSerializer)
+      expect(response).to serialize_object(users).with(UserSerializer)
       # expect(response).to match_response_schema('users')
     end
 

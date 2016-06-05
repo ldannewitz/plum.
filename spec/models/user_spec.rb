@@ -34,8 +34,8 @@ RSpec.describe User, type: :model do
     should { have_many(:expenses) }
   end
 
-  it 'has many invoices' do
-    should { have_many(:invoices) }
+  it 'has many bills' do
+    should { have_many(:bills) }
   end
 
 end

@@ -38,7 +38,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }
@@ -78,7 +78,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }
@@ -115,7 +115,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }

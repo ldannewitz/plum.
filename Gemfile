@@ -28,10 +28,11 @@ gem 'rack-cors'
 gem 'rails_12factor'
 
 gem 'paypal-sdk-rest'
-gem 'httparty'
-gem 'rest-client'
+gem 'paypal-sdk-invoice'
+
 
 group :development, :test do
+  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem "rails-controller-testing", git: "https://github.com/rails/rails-controller-testing"

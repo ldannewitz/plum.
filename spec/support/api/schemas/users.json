@@ -1,0 +1,117 @@
+{
+    "data": [{
+        "id": "1",
+        "type": "users",
+        "attributes": {
+            "name": "Anthony Rizzo",
+            "email": "arizzo@gmail.com",
+            "phone": "1111111111"
+        },
+        "relationships": {
+            "memberships": {
+                "data": [{
+                    "id": "1",
+                    "type": "memberships"
+                }]
+            },
+            "events": {
+                "data": [{
+                    "id": "1",
+                    "type": "events"
+                }]
+            },
+            "expenses": {
+                "data": [{
+                    "id": "1",
+                    "type": "expenses"
+                }, {
+                    "id": "2",
+                    "type": "expenses"
+                }, {
+                    "id": "3",
+                    "type": "expenses"
+                }]
+            },
+            "invoices": {
+                "data": []
+            }
+        }
+    }, {
+        "id": "2",
+        "type": "users",
+        "attributes": {
+            "name": "Kris Bryant",
+            "email": "kbryant@gmail.com",
+            "phone": "2222222222"
+        },
+        "relationships": {
+            "memberships": {
+                "data": [{
+                    "id": "2",
+                    "type": "memberships"
+                }]
+            },
+            "groups": {
+                "data": [{
+                    "id": "1",
+                    "type": "groups"
+                }]
+            },
+            "events": {
+                "data": [{
+                    "id": "1",
+                    "type": "events"
+                }]
+            },
+            "expenses": {
+                "data": [{
+                    "id": "4",
+                    "type": "expenses"
+                }, {
+                    "id": "5",
+                    "type": "expenses"
+                }]
+            },
+            "invoices": {
+                "data": []
+            }
+        }
+    }, {
+        "id": "3",
+        "type": "users",
+        "attributes": {
+            "name": "Addison Russell",
+            "email": "arussell@gmail.com",
+            "phone": "3333333333"
+        },
+        "relationships": {
+            "memberships": {
+                "data": [{
+                    "id": "3",
+                    "type": "memberships"
+                }]
+            },
+            "groups": {
+                "data": [{
+                    "id": "1",
+                    "type": "groups"
+                }]
+            },
+            "events": {
+                "data": [{
+                    "id": "1",
+                    "type": "events"
+                }]
+            },
+            "expenses": {
+                "data": [{
+                    "id": "6",
+                    "type": "expenses"
+                }]
+            },
+            "invoices": {
+                "data": []
+            }
+        }
+    }]
+}

@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :groups, through: :memberships
   has_many :events, through: :groups
   has_many :expenses, foreign_key: :spender_id
-  has_many :invoices
+  has_many :bills
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true

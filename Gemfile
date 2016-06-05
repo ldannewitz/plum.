@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 ruby '2.2.4'
@@ -28,7 +27,12 @@ gem 'rack-cors'
 # Heroku deployment
 gem 'rails_12factor'
 
+gem 'paypal-sdk-rest'
+gem 'paypal-sdk-invoice'
+
+
 group :development, :test do
+  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end

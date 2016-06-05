@@ -31,3 +31,9 @@ coverage
 .env
 database.yml
 config/database.yml
+
+# Ignore env file
+.env
+
+# Ignore curl commands
+curl_commands.txt

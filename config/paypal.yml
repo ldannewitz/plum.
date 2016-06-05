@@ -1,0 +1,29 @@
+test: &default
+
+  # Credentials for REST APIs
+  client_id: ENV['CLIENT_ID']
+  client_secret: ENV['CLIENT_SECRET']
+
+  # Mode can be 'live' or 'sandbox'
+  mode: sandbox
+
+  # Credentials for Classic APIs
+  app_id: ENV['APP_ID']
+  username: ENV['CLASSIC_API_USERNAME']
+  password: ENV['PASSWORD']
+  signature: ENV['SIGNATURE']
+  # # With Certificate
+  # cert_path: "config/cert_key.pem"
+  sandbox_email_address: ENV['SANDBOX_EMAIL_ADDRESS']
+
+  # IP Address
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+  mode: live
+
+
+#     }'

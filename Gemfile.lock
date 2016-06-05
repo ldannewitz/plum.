@@ -65,6 +65,10 @@ GEM
       tins (~> 1.6.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     faker (1.6.3)
       i18n (~> 0.5)
@@ -88,9 +92,19 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
+    multi_json (1.12.1)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    paypal-sdk-core (0.3.4)
+      multi_json (~> 1.0)
+      xml-simple
+    paypal-sdk-invoice (1.117.0)
+      paypal-sdk-core (~> 0.3.0)
+    paypal-sdk-rest (1.4.5)
+      multi_json (~> 1.0)
+      uuidtools (~> 2.1)
+      xml-simple
     pg (0.18.4)
     puma (3.4.0)
     rack (2.0.0.rc1)
@@ -175,9 +189,11 @@ GEM
     tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uuidtools (2.1.5)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -187,9 +203,12 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   coveralls
+  dotenv-rails
   faker
   json-schema
   listen (~> 3.0.5)
+  paypal-sdk-invoice
+  paypal-sdk-rest
   pg (~> 0.18)
   puma (~> 3.0)
   rack-cors

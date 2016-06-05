@@ -35,10 +35,6 @@ group :development, :test do
   gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem "rails-controller-testing", git: "https://github.com/rails/rails-controller-testing"
-  gem "rspec-rails", "3.5.0.beta1"
-  gem 'simplecov', require: false
-  gem 'coveralls', require: false
 end
 
 group :development do
@@ -53,5 +49,17 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test do
   gem 'faker'
+
+  # RSPEC for Rails 5
+  gem "rails-controller-testing", git: "https://github.com/rails/rails-controller-testing"
+  gem "rspec-rails", "3.5.0.beta1"
+  # with additional matchers
   gem 'shoulda-matchers', '~> 3.1.1'
+
+  # Testing Coverage
+  gem 'simplecov', require: false
+  gem 'coveralls', require: false
+
+  # Verify JSON APIs
+  gem 'json-schema'
 end

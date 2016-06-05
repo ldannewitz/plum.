@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 # require File.expand_path('/support', __FILE__)
 require 'support/api_schema_matcher.rb'
+require 'support/serializer_example_group.rb'
 require 'custom_matchers'
 require 'spec_helper'
 require 'rspec/rails'

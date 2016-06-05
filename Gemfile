@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 ruby '2.2.4'
+gem 'dotenv-rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
@@ -32,7 +33,6 @@ gem 'paypal-sdk-invoice'
 
 
 group :development, :test do
-  gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end

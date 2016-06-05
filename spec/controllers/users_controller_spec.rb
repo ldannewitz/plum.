@@ -8,25 +8,19 @@ RSpec.describe UsersController, :type => :controller do
       expect(response).to have_http_status(200)
     end
 
-    # it "should render user serializer" do
-    #   get :index
-    #   assert_serializer "UserSerializer"
-    # end
+    it "loads all of the users into @users" do
+      users = User.all
+      get :index
 
+      expect(assigns(:users)).to match_array(users)
+    end
 
+    it "should render JSON user serializer" do
+      # users = User.all
+      get :index
+      # expect(response). to serialize_object(users).with(UserSerializer)
+      expect(response).to match_response_schema('users')
+    end
 
-
-
-    # it "renders the index template" do
-    #   get :index
-    #   expect(response).to render_template("index")
-    # end
-    #
-    # it "loads all of the posts into @posts" do
-    #   post1, post2 = Post.create!, Post.create!
-    #   get :index
-    #
-    #   expect(assigns(:posts)).to match_array([post1, post2])
-    # end
   end
 end

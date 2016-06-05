@@ -38,18 +38,6 @@ RSpec.describe Expense, type: :model do
 
   describe '#update_total' do
     it 'updates event total' do
-      # puts expense
-      # puts expense.event
-
-      # puts expense.attributes
-      # puts expense.event.total
-      # puts 'saving'
-      # expense.save!
-      # puts Event.find(expense.event_id).id
-      # puts Event.find(expense.event_id).total
-      # puts expense.event.id
-      # puts expense.event.total
-
       expect{expense.save!}.to change {expense.event.total}
     end
   end

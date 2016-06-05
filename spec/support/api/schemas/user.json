@@ -1,0 +1,37 @@
+{
+  "data" : {
+    "id" : "1",
+    "type" : "users",
+    "attributes" : {
+      "name" : "Anthony Rizzo",
+      "email" : "arizzo@gmail.com",
+      "phone" : "1111111111" },
+    "relationships" : {
+      "memberships": {
+        "data" : [{
+          "id" : "1", "type" : "memberships"}
+        ]
+      },
+      "groups" : {
+        "data" : [{
+          "id" : "1", "type" : "groups"}
+        ]
+      },
+      "events" : {
+        "data" : [{
+          "id" : "1", "type" : "events"}
+        ]
+      },
+      "expenses" : {
+        "data" : [{
+          "id" : "1", "type" : "expenses"},
+          {"id":"2","type":"expenses"},
+          {"id":"3","type":"expenses"}
+        ]
+      },
+      "invoices" : {
+        "data":[]
+      }
+    }
+  }
+}

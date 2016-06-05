@@ -86,15 +86,15 @@ class Event < ApplicationRecord
         @create_invoice_response = @api.create_invoice(@create_invoice)
 
         # Response
-        # if @create_invoice_response.success?
-        #   p "Good"
-        #   p @create_invoice_response.invoiceID
-        #   p @create_invoice_response.invoiceNumber
-        #   p @create_invoice_response.invoiceURL
-        # else
-        #   p "Bad"
-        #   @create_invoice_response.error
-        # end
+        if @create_invoice_response.success?
+          p "Good"
+          p @create_invoice_response.invoiceID
+          p @create_invoice_response.invoiceNumber
+          p @create_invoice_response.invoiceURL
+        else
+          p "Bad"
+          @create_invoice_response.error
+        end
       end # close API call
     end # close create bill loop
   end # close generate_invoices method

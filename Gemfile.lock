@@ -70,6 +70,9 @@ GEM
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     listen (3.0.8)
@@ -85,9 +88,15 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
+    multi_json (1.12.1)
+    multi_xml (0.5.5)
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    paypal-sdk-rest (1.4.5)
+      multi_json (~> 1.0)
+      uuidtools (~> 2.1)
+      xml-simple
     pg (0.18.4)
     puma (3.4.0)
     rack (2.0.0.rc1)
@@ -130,6 +139,8 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec-core (3.5.0.beta1)
       rspec-support (= 3.5.0.beta1)
     rspec-expectations (3.5.0.beta1)
@@ -172,9 +183,11 @@ GEM
     tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uuidtools (2.1.5)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -185,13 +198,16 @@ DEPENDENCIES
   byebug
   coveralls
   faker
+  httparty
   listen (~> 3.0.5)
+  paypal-sdk-rest
   pg (~> 0.18)
   puma (~> 3.0)
   rack-cors
   rails (>= 5.0.0.rc1, < 5.1)
   rails-controller-testing!
   rails_12factor
+  rest-client
   rspec-rails (= 3.5.0.beta1)
   shoulda-matchers (~> 3.1.1)
   simplecov

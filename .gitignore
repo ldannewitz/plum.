@@ -31,3 +31,6 @@ coverage
 .env
 database.yml
 config/database.yml
+
+paypal.yml
+.env

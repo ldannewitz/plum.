@@ -45,7 +45,6 @@ class Event < ApplicationRecord
   # generate bill objects in the database
   def generate_invoices
     self.get_member_balances.each do |bill|
-      # p bill
       # Get user
       user = User.find_by(email: bill[0])
       # Get bill type
@@ -75,8 +74,6 @@ class Event < ApplicationRecord
           :username  => ENV['USERNAME'],
           :password  => ENV['PASSWORD'],
           :signature => ENV['SIGNATURE'])
-          # :token =>
-          # :token_secret => )
 
         # Build request object
         @create_and_send_invoice = @api.build_create_and_send_invoice({
@@ -97,22 +94,82 @@ class Event < ApplicationRecord
 
         # Access Response
         if @create_and_send_invoice_response.success?
-          @new_bill.update_attribute(:paypal_invoice_id, @create_and_send_invoice_response.invoiceID)
+          @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
           @new_bill.save
-          # p "yes"
           # p @create_and_send_invoice_response
-          @create_and_send_invoice_response.invoiceID
-          @create_and_send_invoice_response.invoiceNumber
-          @create_and_send_invoice_response.invoiceURL
-          @create_and_send_invoice_response.totalAmount
+          # @create_and_send_invoice_response.invoiceID
+          # @create_and_send_invoice_response.invoiceNumber
+          # @create_and_send_invoice_response.invoiceURL
+          # @create_and_send_invoice_response.totalAmount
         else
-          # p "no"
           @create_and_send_invoice_response.error
-        end
+        end # close response loop
+
       end # close API call
     end # close create bill loop
   end # close generate_invoices method
 
-end
+  def all_invoices_paid?
+    all_paid = false
+    self.bills.each do |bill|
+      p bill
+      if bill.bill_type == 'debit' && bill.satisfied? == false
+        return all_paid
+      end
+    end
+    self.payout
+  end
 
-# https://www.sandbox.paypal.com/us/cgi_bin/webscr?cmd=_pay-inv&id=INV2-QKQM-JHZT-ABBL-8LUX&viewtype=altview
+  def payout
+    self.bills.each do |bill|
+      if bill.bill_type == 'credit'
+        creditor = User.find(bill.user_id)
+        email = creditor.email
+
+        @api = PayPal::SDK::REST.set_config(
+              :mode => "sandbox",
+              :client_id => ENV['CLIENT_ID'],
+              :client_secret => ENV['CLIENT_SECRET'])
+
+        # Build request object
+        @payout = Payout.new(
+            {
+              :sender_batch_header => {
+                :sender_batch_id => SecureRandom.hex(8),
+                :email_subject => 'You have a Payout!',
+              },
+              :items => [
+                {
+                  :recipient_type => 'EMAIL',
+                  :amount => {
+                    :value => bill.amount,
+                    :currency => 'USD'
+                  },
+                  :note => 'Thanks for your patronage!',
+                  :receiver => email,
+                  :sender_item_id => "2014031400023",
+                }]})
+
+        # Create Payment and return the status(true or false)
+        if @payout.create
+          p @payout # Payout Id
+          bill.update_attributes(:satisfied? => true, :paypal_id => "123")
+          self.event_settled?
+        else
+          @payout.error  # Error Hash
+        end # Close if/else status
+      end # Close if bill.bill_type = 'credit' loop
+    end # Close bills.each loop
+  end # Close payout method
+
+  # Update an event status to satisfied if all debtors and paid and all creditors have been paid
+  def event_settled?
+    self.bills.each do |bill|
+      if bill.satisfied? == false
+        return "not satisfied"
+      end
+    end
+    self.update_attributes(:settled? => true)
+  end
+
+end

@@ -113,6 +113,19 @@ class Event < ApplicationRecord
     end # close create bill loop
   end # close generate_invoices method
 
+  def all_invoices_paid?
+    # all_paid? = true
+    self.bills.each do |bill|
+      p bill
+    #   if bill.satisfied? == false
+    #     all_paid? = false
+    #     return all_paid?
+    #   end
+    end
+    # all_paid = true
+    # return all_paid?
+  end
+
 end
 
 # https://www.sandbox.paypal.com/us/cgi_bin/webscr?cmd=_pay-inv&id=INV2-QKQM-JHZT-ABBL-8LUX&viewtype=altview

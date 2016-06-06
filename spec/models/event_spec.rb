@@ -63,14 +63,14 @@ RSpec.describe Event, type: :model do
       expect(@event.expired?).to be(false)
     end
 
-    it 'calls #generate_invoices when the event is expired' do
-      @event.end_date = DateTime.new(2016, 6, 5)
-      # puts event.end_date
-      # puts DateTime.now
-      # puts event.end_date < DateTime.now
-      @event.should_receive(:generate_invoices)
-      @event.expired?
-    end
+    # it 'calls #generate_invoices when the event is expired' do
+    #   @event.end_date = DateTime.new(2016, 6, 5)
+    #   # puts event.end_date
+    #   # puts DateTime.now
+    #   # puts event.end_date < DateTime.now
+    #   @event.should_receive(:generate_invoices)
+    #   @event.expired?
+    # end
   end
 
   describe '#even_split' do
@@ -90,17 +90,17 @@ RSpec.describe Event, type: :model do
     let!(:friend) { User.create!(first_name: 'Friend', last_name: 'Person', email: 'em@ail.com', password: 'password') }
     let!(:membershippp) { Membership.create!(member: friend, group: @cubs_infield) }
 
-    it 'generates a debit bill for a user who owes money' do
-      @member.expenses.first.update(amount: 0)
-      expect{@event.generate_invoices}.to change{Bill.all.count}.by(2)
-      expect(@member.bills.first.bill_type).to eq('debit')
-    end
-
-    it 'generates a credit bill for a user who is owed money' do
-      @event.update(total: 10)
-      expect{@event.generate_invoices}.to change{@member.bills.count}.by(1)
-      expect(@member.bills.first.bill_type).to eq('credit')
-    end
+    # it 'generates a debit bill for a user who owes money' do
+    #   @member.expenses.first.update(amount: 0)
+    #   expect{@event.generate_invoices}.to change{Bill.all.count}.by(2)
+    #   expect(@member.bills.first.bill_type).to eq('debit')
+    # end
+    #
+    # it 'generates a credit bill for a user who is owed money' do
+    #   @event.update(total: 10)
+    #   expect{@event.generate_invoices}.to change{@member.bills.count}.by(1)
+    #   expect(@member.bills.first.bill_type).to eq('credit')
+    # end
 
     it 'does not generate an invoice if a user has no balance' do
       @event.update(total: 12.4)

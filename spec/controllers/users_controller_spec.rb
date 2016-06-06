@@ -97,41 +97,41 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  describe "POST #new_event" do
-    let(:json) { NEW_EVENT_JSON }
+  # describe "POST #new_event" do
+  #   let(:json) { NEW_EVENT_JSON }
+  #
+  #   it "responds successfully with an HTTP 204 status code" do
+  #     silence_stream(STDOUT) do
+  #       post :new_event, params: json
+  #       aggregate_failures "testing response" do
+  #         expect(response).to be_success
+  #         expect(response).to have_http_status(204)
+  #       end
+  #     end
+  #   end
+  #
+  #   # it "creates a new user event" do
+  #   #   expect {post :new_event, params: json}.to change {Event.all.count}.by(1)
+  #   # end
+  # end
 
-    it "responds successfully with an HTTP 204 status code" do
-      silence_stream(STDOUT) do
-        post :new_event, params: json
-        aggregate_failures "testing response" do
-          expect(response).to be_success
-          expect(response).to have_http_status(204)
-        end
-      end
-    end
-
-    # it "creates a new user event" do
-    #   expect {post :new_event, params: json}.to change {Event.all.count}.by(1)
-    # end
-  end
-
-  describe "POST #create" do
-    let(:json) { NEW_USER_JSON }
-
-    it "responds successfully with an HTTP 204 status code" do
-      silence_stream(STDOUT) do
-        post :create, params: json
-        aggregate_failures "testing response" do
-          expect(response).to be_success
-          expect(response).to have_http_status(204)
-        end
-      end
-    end
-
-    it "creates a new user" do
-      silence_stream(STDOUT) do
-        expect {post :create, params: json}.to change {User.all.count}.by(1)
-      end
-    end
-  end
+  # describe "POST #create" do
+  #   let(:json) { NEW_USER_JSON }
+  #
+  #   it "responds successfully with an HTTP 204 status code" do
+  #     silence_stream(STDOUT) do
+  #       post :create, params: json
+  #       aggregate_failures "testing response" do
+  #         expect(response).to be_success
+  #         expect(response).to have_http_status(204)
+  #       end
+  #     end
+  #   end
+  #
+  #   it "creates a new user" do
+  #     silence_stream(STDOUT) do
+  #       expect {post :create, params: json}.to change {User.all.count}.by(1)
+  #     end
+  #   end
+  # end
 end

@@ -23,8 +23,6 @@ class UsersController < ApplicationController
 
   def new_event
     # got this from active_model_serializers GitHub
-    p params
-    p event_params
     Event.create(event_params) # or .new?
 
     ## What do we send back here???

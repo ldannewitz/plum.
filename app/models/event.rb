@@ -45,7 +45,7 @@ class Event < ApplicationRecord
   # generate bill objects in the database
   def generate_invoices
     self.get_member_balances.each do |bill|
-      p bill
+      # p bill
       # Get user
       user = User.find_by(email: bill[0])
       # Get bill type
@@ -65,7 +65,7 @@ class Event < ApplicationRecord
       if bill_type == 'debit'
         name = self.name
         email = User.find(@new_bill.user_id).email
-        p @new_bill.amount
+        # p @new_bill.amount
         unit_price = (@new_bill.amount * (-1))
 
         # Set up PayPal client
@@ -99,14 +99,14 @@ class Event < ApplicationRecord
         if @create_and_send_invoice_response.success?
           @new_bill.update_attribute(:paypal_invoice_id, @create_and_send_invoice_response.invoiceID)
           @new_bill.save
-          p "yes"
-          p @create_and_send_invoice_response
+          # p "yes"
+          # p @create_and_send_invoice_response
           @create_and_send_invoice_response.invoiceID
           @create_and_send_invoice_response.invoiceNumber
           @create_and_send_invoice_response.invoiceURL
           @create_and_send_invoice_response.totalAmount
         else
-          p "no"
+          # p "no"
           @create_and_send_invoice_response.error
         end
       end # close API call

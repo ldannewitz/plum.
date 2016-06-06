@@ -1,17 +1,14 @@
 class GroupsController < ApplicationController
   def create
-    # @group = Group.new(group_params)
+    puts "in the groups create route"
+    @group = Group.new(group_params)
 
-    # got this from active_model_serializers GitHub
-    Group.create(group_params) # or .new?
-
-    ## What do we send back here???
-
-    # if @group.save
-    #   redirect_to @group
-    # else
-    #   render 'new'
-    # end
+    if @group.save
+      # add_members
+      render json: @group, status: :created, location: @group
+    else
+      render json: @group.errors, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -26,11 +23,8 @@ class GroupsController < ApplicationController
   end
 
   def add_members
-    @group = Group.find(params[:id])
-    # depends what we get from the front end?
-    @group.members = []
-    # again, what are we sending back?
-    # or where do we route?
+    # iterate over array of members passed from front and make new members
+    p group_params['members']
   end
 
   def events
@@ -42,10 +36,11 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name])
+    puts "in the group params"
+    p params
+    #   params.require(:group).permit(:name)
+    # ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name])
+    JSON.parse(request.body.read)
   end
 
-  # def group_params
-  #   params.require(:group).permit(:name)
-  # end
 end

@@ -96,14 +96,12 @@ class Event < ApplicationRecord
         if @create_and_send_invoice_response.success?
           @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
           @new_bill.save
-          # p "yes"
           # p @create_and_send_invoice_response
           # @create_and_send_invoice_response.invoiceID
           # @create_and_send_invoice_response.invoiceNumber
           # @create_and_send_invoice_response.invoiceURL
           # @create_and_send_invoice_response.totalAmount
         else
-          # p "no"
           @create_and_send_invoice_response.error
         end # close response loop
 
@@ -133,7 +131,7 @@ class Event < ApplicationRecord
               :client_id => ENV['CLIENT_ID'],
               :client_secret => ENV['CLIENT_SECRET'])
 
-        # Build Payment object
+        # Build request object
         @payout = Payout.new(
             {
               :sender_batch_header => {
@@ -155,12 +153,23 @@ class Event < ApplicationRecord
         # Create Payment and return the status(true or false)
         if @payout.create
           p @payout # Payout Id
-          # bill.update_attribute(:paypal_id => "123")
+          bill.update_attributes(:satisfied? => true, :paypal_id => "123")
+          self.event_settled?
         else
           @payout.error  # Error Hash
         end # Close if/else status
       end # Close if bill.bill_type = 'credit' loop
     end # Close bills.each loop
   end # Close payout method
+
+  # Update an event status to satisfied if all debtors and paid and all creditors have been paid
+  def event_settled?
+    self.bills.each do |bill|
+      if bill.satisfied? == false
+        return "not satisfied"
+      end
+    end
+    self.update_attributes(:settled? => true)
+  end
 
 end

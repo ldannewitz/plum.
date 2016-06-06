@@ -5,5 +5,5 @@ class EventSerializer < ActiveModel::Serializer
   has_many :memberships
   has_many :members
   has_many :expenses
-  has_many :invoices
+  has_many :bills
 end

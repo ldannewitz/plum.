@@ -5,7 +5,7 @@ class UserSerializer < ActiveModel::Serializer
   has_many :groups
   has_many :events
   has_many :expenses
-  has_many :invoices
+  has_many :bills
 
   def name
     "#{object.first_name} #{object.last_name}"

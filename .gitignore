@@ -28,7 +28,6 @@ coverage
 .DS_Store
 /app/.DS_Store
 /app/spec/.DS_Store
-.env
 database.yml
 config/database.yml
 

@@ -12,9 +12,12 @@ class Event < ApplicationRecord
 
   validates :name, :start_date, :end_date, :group_id, :total, presence: true
 
-  # is the event over? If so, generate_bills
+  # is the event over? If so, generate_invoices
   def expired?
-    self.end_date < Time.now ? generate_invoices : false
+    # puts self.end_date
+    # puts Time.now
+    # puts self.end_date < Time.now
+    self.end_date < DateTime.now ? generate_invoices : false
   end
 
   # find how much each member would pay in an even split
@@ -42,11 +45,14 @@ class Event < ApplicationRecord
   # generate bill objects in the database
   def generate_invoices
     self.get_member_balances.each do |bill|
+      p bill
       # Get user
       user = User.find_by(email: bill[0])
       # Get bill type
-      bill_type = ''
-      if bill[1] > 0
+      bill_type = nil
+      if bill[1] == 0
+        return 0
+      elsif bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
         bill_type = 'debit'

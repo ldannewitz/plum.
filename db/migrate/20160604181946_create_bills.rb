@@ -4,6 +4,7 @@ class CreateBills < ActiveRecord::Migration[5.0]
       t.integer :event_id, { null: false }
       t.integer :user_id, { null: false }
       t.string :bill_type, { null: false }
+      t.string :paypal_invoice_id
       t.float :amount, { null: false, scale: 2 }
       t.boolean :satisfied?, { null: false, default: false }
 

@@ -53,15 +53,14 @@ class Event < ApplicationRecord
       end
 
       # create bill object
-      new_bill = Bill.create!(event_id: self.id, user_id: user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
-      p new_bill
+      @new_bill = Bill.create!(event_id: self.id, user_id: user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
 
       # for the users that owe money, create an invoice using PayPal API
       if bill_type == 'debit'
         name = self.name
-        email = User.find(new_bill.user_id).email
-        p new_bill.amount
-        unit_price = (new_bill.amount * (-1))
+        email = User.find(@new_bill.user_id).email
+        p @new_bill.amount
+        unit_price = (@new_bill.amount * (-1))
 
         # Set up PayPal client
         @api = PayPal::SDK::Invoice::API.new(
@@ -69,9 +68,9 @@ class Event < ApplicationRecord
           :app_id    => ENV['APP_ID'],
           :username  => ENV['USERNAME'],
           :password  => ENV['PASSWORD'],
-          :signature => ENV['SIGNATURE'],
-          :token =>
-          :token_secret => )
+          :signature => ENV['SIGNATURE'])
+          # :token =>
+          # :token_secret => )
 
         # Build request object
         @create_and_send_invoice = @api.build_create_and_send_invoice({
@@ -92,8 +91,10 @@ class Event < ApplicationRecord
 
         # Access Response
         if @create_and_send_invoice_response.success?
+          @new_bill.update_attribute(:paypal_invoice_id, @create_and_send_invoice_response.invoiceID)
+          @new_bill.save
           p "yes"
-          # p @create_and_send_invoice_response
+          p @create_and_send_invoice_response
           @create_and_send_invoice_response.invoiceID
           @create_and_send_invoice_response.invoiceNumber
           @create_and_send_invoice_response.invoiceURL
@@ -108,4 +109,4 @@ class Event < ApplicationRecord
 
 end
 
-#<PayPal::SDK::Invoice::DataTypes::CreateAndSendInvoiceResponse:0x007feede949cb8 @responseEnvelope=#<PayPal::SDK::Invoice::DataTypes::ResponseEnvelope:0x007feede949c18 @timestamp=Sun, 05 Jun 2016 17:28:50 -0700, @ack="Success", @correlationId="9ca5146ecd007", @build="18672937">, @invoiceID="INV2-EGAD-9CWF-AMNA-L5BJ", @invoiceNumber="0064", @invoiceURL="https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_inv-details&id=INV2-EGAD-9CWF-AMNA-L5BJ", @payerViewURL="https://www.sandbox.paypal.com/us/cgi_bin/webscr?cmd=_pay-inv&viewtype=altview&id=INV2-EGAD-9CWF-AMNA-L5BJ", @totalAmount=7995>
+# https://www.sandbox.paypal.com/us/cgi_bin/webscr?cmd=_pay-inv&id=INV2-QKQM-JHZT-ABBL-8LUX&viewtype=altview

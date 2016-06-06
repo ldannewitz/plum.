@@ -1,5 +1,7 @@
+require 'paypal-sdk-rest'
 require 'paypal-sdk-invoice'
 include PayPal::SDK::REST
+include PayPal::SDK::Core::Logging
 
 class Event < ApplicationRecord
   belongs_to :group
@@ -12,7 +14,7 @@ class Event < ApplicationRecord
 
   # is the event over? If so, generate_bills
   def expired?
-    self.end_date < Time.now ? generate_bills : false
+    self.end_date < Time.now ? generate_invoices : false
   end
 
   # find how much each member would pay in an even split
@@ -43,7 +45,7 @@ class Event < ApplicationRecord
       # Get user
       user = User.find_by(email: bill[0])
       # Get bill type
-      bill_type = nil
+      bill_type = ''
       if bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
@@ -58,7 +60,8 @@ class Event < ApplicationRecord
       if bill_type == 'debit'
         name = self.name
         email = User.find(new_bill.user_id).email
-        unit_price = (new_bill.amount * (-100)).round(0).to_s
+        p new_bill.amount
+        unit_price = (new_bill.amount * (-1))
 
         # Set up PayPal client
         @api = PayPal::SDK::Invoice::API.new(
@@ -66,10 +69,12 @@ class Event < ApplicationRecord
           :app_id    => ENV['APP_ID'],
           :username  => ENV['USERNAME'],
           :password  => ENV['PASSWORD'],
-          :signature => ENV['SIGNATURE'] )
+          :signature => ENV['SIGNATURE'],
+          :token =>
+          :token_secret => )
 
         # Build request object
-        @create_invoice = @api.build_create_invoice({
+        @create_and_send_invoice = @api.build_create_and_send_invoice({
           :invoice => {
             :merchantEmail => ENV['MERCHANT_EMAIL'],
             :payerEmail => email,
@@ -83,20 +88,24 @@ class Event < ApplicationRecord
             :paymentTerms => "DueOnReceipt" } })
 
         # Make API call & get response
-        @create_invoice_response = @api.create_invoice(@create_invoice)
+        @create_and_send_invoice_response = @api.create_and_send_invoice(@create_and_send_invoice)
 
-        # Response
-        # if @create_invoice_response.success?
-        #   p "Good"
-        #   p @create_invoice_response.invoiceID
-        #   p @create_invoice_response.invoiceNumber
-        #   p @create_invoice_response.invoiceURL
-        # else
-        #   p "Bad"
-        #   @create_invoice_response.error
-        # end
+        # Access Response
+        if @create_and_send_invoice_response.success?
+          p "yes"
+          # p @create_and_send_invoice_response
+          @create_and_send_invoice_response.invoiceID
+          @create_and_send_invoice_response.invoiceNumber
+          @create_and_send_invoice_response.invoiceURL
+          @create_and_send_invoice_response.totalAmount
+        else
+          p "no"
+          @create_and_send_invoice_response.error
+        end
       end # close API call
     end # close create bill loop
   end # close generate_invoices method
 
 end
+
+#<PayPal::SDK::Invoice::DataTypes::CreateAndSendInvoiceResponse:0x007feede949cb8 @responseEnvelope=#<PayPal::SDK::Invoice::DataTypes::ResponseEnvelope:0x007feede949c18 @timestamp=Sun, 05 Jun 2016 17:28:50 -0700, @ack="Success", @correlationId="9ca5146ecd007", @build="18672937">, @invoiceID="INV2-EGAD-9CWF-AMNA-L5BJ", @invoiceNumber="0064", @invoiceURL="https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_inv-details&id=INV2-EGAD-9CWF-AMNA-L5BJ", @payerViewURL="https://www.sandbox.paypal.com/us/cgi_bin/webscr?cmd=_pay-inv&viewtype=altview&id=INV2-EGAD-9CWF-AMNA-L5BJ", @totalAmount=7995>

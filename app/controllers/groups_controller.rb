@@ -3,7 +3,11 @@ class GroupsController < ApplicationController
     # @group = Group.new(group_params)
 
     # got this from active_model_serializers GitHub
-    Group.create(group_params) # or .new?
+
+    # pull out members
+    puts params
+    # return 200
+    # Group.create(group_params) # or .new?
 
     ## What do we send back here???
 
@@ -25,6 +29,7 @@ class GroupsController < ApplicationController
     render json: @members
   end
 
+  # make this a MODEL METHOD instead
   def add_members
     @group = Group.find(params[:id])
     # depends what we get from the front end?
@@ -42,7 +47,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name])
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name], [:members])
   end
 
   # def group_params

@@ -9,8 +9,7 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "loads all of the users into @users" do
-      puts 'all users'
-      puts users = User.all
+      users = User.all
       get :index
 
       expect(assigns(:users)).to match_array(users)

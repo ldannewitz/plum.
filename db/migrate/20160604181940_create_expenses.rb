@@ -6,6 +6,7 @@ class CreateExpenses < ActiveRecord::Migration[5.0]
       t.string :description, { null: false }
       t.float :amount, { null: false, scale: 2 }
       t.string :location
+      t.string :photo_url
 
       t.timestamps null: false
     end

@@ -22,10 +22,9 @@ class UsersController < ApplicationController
   end
 
   def new_event
+    puts params
     # got this from active_model_serializers GitHub
-    p params
-    p event_params
-    Event.create(event_params) # or .new?
+    # Event.create(event_params) # or .new?
 
     ## What do we send back here???
 
@@ -37,8 +36,9 @@ class UsersController < ApplicationController
   end
 
   def create
+    puts params
     # got this from active_model_serializers GitHub
-    User.create(user_params) # or .new?
+    # User.create(user_params) # or .new?
 
     ## What do we send back here???
 

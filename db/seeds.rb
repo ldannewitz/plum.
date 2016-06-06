@@ -1,5 +1,5 @@
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
-kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "kbryant@gmail.com", password: "password", phone: "2222222222")
+kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 brad = User.create!(first_name: "Brad", last_name: "Lindgren", email: "bplindgren91@gmail.com", password: "password", phone: "3333333333")
 
 cubs_infield = Group.create!(name: "Cubs")

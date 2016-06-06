@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'coveralls'
+require 'support/reporting.rb'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
@@ -36,6 +37,7 @@ end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include Reporting
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -60,6 +62,13 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
     mocks.syntax = :should
   end
+
+  # config.after :all do
+  #   # ActiveRecord::Base.subclasses.each(&:delete_all)
+  #   # puts 'testing 123'
+  #   # system 'bundle exec rake db:schema:load RAILS_ENV=test'
+  #   # ActiveRecord::Base.subclasses.each(&:delete_all)
+  # end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

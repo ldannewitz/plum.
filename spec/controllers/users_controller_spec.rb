@@ -3,17 +3,21 @@ require "rails_helper"
 RSpec.describe UsersController, :type => :controller do
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do
-      get :index
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+      silence_stream(STDOUT) do
+        get :index
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(200)
+        end
+      end
     end
 
     it "loads all of the users into @users" do
-      puts 'all users'
-      puts users = User.all
-      get :index
-
-      expect(assigns(:users)).to match_array(users)
+      users = User.all
+      silence_stream(STDOUT) do
+        get :index
+        expect(assigns(:users)).to match_array(users)
+      end
     end
 
     # it "should serialize users JSON" do
@@ -25,18 +29,23 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET #show" do
-    let(:user) {User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")}
+    let(:user) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111") }
 
     it "responds successfully with an HTTP 200 status code" do
-      get :show, params: { id: user.id }
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+      silence_stream(STDOUT) do
+        get :show, params: { id: user.id }
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(200)
+        end
+      end
     end
 
     it "loads a user into @user" do
-      get :show, params: { id: user.id }
-
-      expect(assigns(:user)).to match(user)
+      silence_stream(STDOUT) do
+        get :show, params: { id: user.id }
+        expect(assigns(:user)).to match(user)
+      end
     end
 
     # it "should serialize user JSON" do
@@ -47,36 +56,44 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET #groups" do
-    let(:user) {User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")}
+    let(:user) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111") }
 
     it "responds successfully with an HTTP 200 status code" do
-      get :groups, params: { id: user.id }
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+      silence_stream(STDOUT) do
+        get :groups, params: { id: user.id }
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(200)
+        end
+      end
     end
 
     it "loads a user's groups into @groups" do
       groups = user.groups
       get :groups, params: { id: user.id }
-
       expect(assigns(:groups)).to match_array(groups)
     end
   end
 
   describe "GET #events" do
-    let(:user) {User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")}
+    let(:user) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111") }
 
     it "responds successfully with an HTTP 200 status code" do
-      get :events, params: { id: user.id }
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+      silence_stream(STDOUT) do
+        get :events, params: { id: user.id }
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(200)
+        end
+      end
     end
 
     it "loads a user's events into @events" do
-      events = user.events
-      get :events, params: { id: user.id }
-
-      expect(assigns(:events)).to match_array(events)
+      silence_stream(STDOUT) do
+        events = user.events
+        get :events, params: { id: user.id }
+        expect(assigns(:events)).to match_array(events)
+      end
     end
   end
 
@@ -84,9 +101,13 @@ RSpec.describe UsersController, :type => :controller do
     let(:json) { NEW_EVENT_JSON }
 
     it "responds successfully with an HTTP 204 status code" do
-      post :new_event, params: json
-      expect(response).to be_success
-      expect(response).to have_http_status(204)
+      silence_stream(STDOUT) do
+        post :new_event, params: json
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(204)
+        end
+      end
     end
 
     # it "creates a new user event" do
@@ -98,13 +119,19 @@ RSpec.describe UsersController, :type => :controller do
     let(:json) { NEW_USER_JSON }
 
     it "responds successfully with an HTTP 204 status code" do
-      post :create, params: json
-      expect(response).to be_success
-      expect(response).to have_http_status(204)
+      silence_stream(STDOUT) do
+        post :create, params: json
+        aggregate_failures "testing response" do
+          expect(response).to be_success
+          expect(response).to have_http_status(204)
+        end
+      end
     end
 
     it "creates a new user" do
-      expect {post :create, params: json}.to change {User.all.count}.by(1)
+      silence_stream(STDOUT) do
+        expect {post :create, params: json}.to change {User.all.count}.by(1)
+      end
     end
   end
 end

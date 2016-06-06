@@ -52,7 +52,7 @@ group :test do
 
   # RSPEC for Rails 5
   gem "rails-controller-testing", git: "https://github.com/rails/rails-controller-testing"
-  gem "rspec-rails", "3.5.0.beta1"
+  gem "rspec-rails", "3.5.0.beta4"
   # with additional matchers
   gem 'shoulda-matchers', '~> 3.1.1'
 

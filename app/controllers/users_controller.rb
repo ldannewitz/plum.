@@ -14,13 +14,13 @@ class UsersController < ApplicationController
 
   # GET /users/:id/groups
   def groups
-    @groups = user.groups
+    @groups = @user.groups
     render json: @groups
   end
 
   # GET /users/:id/events
   def events
-    @events = user.events
+    @events = @user.events
     render json: @events
   end
 

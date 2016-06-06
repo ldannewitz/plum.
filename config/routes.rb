@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:show, :create]
   get '/groups/:id/members' => 'groups#members', as: 'group_members'
-  post '/groups/:id/members' => 'groups#add_members', as: 'add_group_members'
+  # post '/groups/:id/members' => 'groups#add_members', as: 'add_group_members'
   get '/groups/:id/events' => 'groups#events', as: 'group_events'
 
   resources :events, only: [:show]

@@ -14,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :events, only: [:show]
 
-  resources :invoices, except: [:update, :edit]
+  resources :bills, except: [:update, :edit]
 end

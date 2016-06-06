@@ -14,6 +14,12 @@
                     "type": "memberships"
                 }]
             },
+            "groups": {
+                "data": [{
+                    "id": "1",
+                    "type": "groups"
+                }]
+            },
             "events": {
                 "data": [{
                     "id": "1",
@@ -32,7 +38,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }
@@ -72,7 +78,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }
@@ -109,7 +115,7 @@
                     "type": "expenses"
                 }]
             },
-            "invoices": {
+            "bills": {
                 "data": []
             }
         }

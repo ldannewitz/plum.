@@ -9,6 +9,7 @@ describe EventSerializer do
       settled?: false,
       group_id: 1,
       total: 10.00,
+      members: [User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")]
     )
   end
 

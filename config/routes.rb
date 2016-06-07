@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/register' => 'users#new'
-  get '/login' => 'sessions#new'
+  # get '/login' => 'sessions#new'
   post '/login' => 'sessions#login'
   get '/logout' => 'sessions#logout'
 
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/groups' => 'users#groups', as: 'user_groups'
   get '/users/:id/events' => 'users#events', as: 'user_events'
+  get '/users/:id/bills' => 'users#bills', as: 'user_bills'
   post '/users/:id/events' => 'users#new_event', as: 'user_new_event'
 
   resources :groups, only: [:show, :create]

@@ -2,7 +2,9 @@ require 'sendgrid-ruby'
 require 'email_template'
 
 module SendGrid
-  def send_email(paypal_invoice_id)
+  def send_email(paypal_invoice_id, to_email)
+    puts "email in send grid"
+    puts to_email
     @event_name = self.name
     @url = "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{paypal_invoice_id}"
 
@@ -14,7 +16,8 @@ module SendGrid
     # Create a new Mail object and send:
     mail = SendGrid::Mail.new do |m|
       # m.to = 'bplindgren91@gmail.com'
-      m.to = 'lisa.dannewitz@gmail.com'
+      puts to_email
+      m.to = to_email
       m.from = 'dbcfsplum-facilitator@gmail.com'
       m.subject = 'Correct invoice links?'
       m.html = template

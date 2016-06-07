@@ -102,6 +102,7 @@ class Event < ApplicationRecord
         if @create_and_send_invoice_response.success?
           @new_bill.update_attribute(:paypal_invoice_id, @create_and_send_invoice_response.invoiceID)
           @new_bill.save
+          send_email(@new_bill.paypal_invoice_id)
           # p "yes"
           # p @create_and_send_invoice_response
           @create_and_send_invoice_response.invoiceID

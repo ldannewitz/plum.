@@ -2,8 +2,11 @@ require 'paypal-sdk-rest'
 require 'paypal-sdk-invoice'
 include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
+require 'sendgrid-ruby'
+require 'send_grid.rb'
 
 class Event < ApplicationRecord
+  include SendGrid
   belongs_to :group
   has_many :memberships, through: :group
   has_many :members, through: :memberships, class_name: 'User'

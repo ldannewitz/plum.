@@ -41,7 +41,7 @@ class Event < ApplicationRecord
   # find how much each member has already paid
   def find_member_total(expenses, member)
     total = 0
-    expenses.each { |expense| total += expense.amount if expense.event_id == self.id && expense.spender_id == member.id }
+    expenses.each { |expense| total += expense.amount if expense.spender_id == member.id }
     total
   end
 
@@ -49,12 +49,12 @@ class Event < ApplicationRecord
   def generate_invoices
     self.get_member_balances.each do |bill|
       # Get user
-      user = User.find_by(email: bill[0])
+      @user = User.find_by(email: bill[0])
       # Get bill type
       bill_type = nil
       if bill[1] == 0
         # If the user paid exactly their fair share...create a bill for them with amount 0
-        return @new_bill = Bill.create!(event_id: self.id, user_id: user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
+        return @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
       elsif bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
@@ -62,13 +62,12 @@ class Event < ApplicationRecord
       end
 
       # create bill object
-      @new_bill = Bill.create!(event_id: self.id, user_id: user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
+      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
 
       # for the users that owe money, create an invoice using PayPal API
       if bill_type == 'debit'
-        name = self.name
-        email = User.find(@new_bill.user_id).email
-        # p @new_bill.amount
+        event_name = self.name
+        email = @user.email
         unit_price = (@new_bill.amount * (-1))
 
         # Set up PayPal client
@@ -85,7 +84,7 @@ class Event < ApplicationRecord
             :merchantEmail => ENV['MERCHANT_EMAIL'],
             :payerEmail => email,
             :itemList => {
-                :item => [{ "name": name,
+                :item => [{ "name": event_name,
                             "quantity": "1",
                             "unitPrice": unit_price
                           }]
@@ -135,7 +134,7 @@ class Event < ApplicationRecord
   # Payout the creditors
   def payout
     self.bills.each do |bill|
-      if bill.bill_type == 'credit'
+      if bill.bill_type == 'credit' && bill.satisfied? == false
         creditor = User.find(bill.user_id)
         email = creditor.email
 
@@ -161,13 +160,13 @@ class Event < ApplicationRecord
                   },
                   :note => 'Thanks for your patronage!',
                   :receiver => email,
-                  :sender_item_id => "2014031400023",
+                  :sender_item_id => "2014031401013",
                 }]})
 
         # Create Payment and return the status (true/false)
         if @payout.create
           bill.update_attributes(:satisfied? => true, :paypal_id => "123")
-          self.event_settled?
+          settle_event
         else
           @payout.error  # Error Hash
         end # Close if/else status
@@ -176,7 +175,7 @@ class Event < ApplicationRecord
   end # Close payout method
 
   # Update an event status to satisfied when all debtors and paid and all creditors have been paid
-  def event_settled?
+  def settle_event
     self.bills.each do |bill|
       if bill.satisfied? == false
         return "not satisfied"

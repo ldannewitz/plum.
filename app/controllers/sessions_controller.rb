@@ -6,19 +6,12 @@ class SessionsController < ApplicationController
 
   def login
     @user = User.find_by(email: session_params[:email])
-    p "================="
-    p params
-    p "======initial params====="
     if @user && @user.authenticate(session_params[:password])
-      p "++++++++++++++++++"
-      p params
-      p "+++++++if statement true+++++++++++"
       session[:user_id] = @user.id
       render json: @user, status: :created, location: @user
     else
       @error = "Invalid email adress or password"
       render json: @error, status: :unprocessable_entity
-      p "helloooopooooooooooo"
     end
   end
 

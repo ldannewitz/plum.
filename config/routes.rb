@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/register' => 'users#new'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#login'
+  get '/logout' => 'sessions#logout'
 
   resources :users, only: [:index, :show, :create]
 
@@ -15,4 +19,5 @@ Rails.application.routes.draw do
   resources :events, only: [:show]
 
   resources :bills, except: [:update, :edit]
+
 end

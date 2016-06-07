@@ -1,13 +1,16 @@
 class SessionsController < ApplicationController
 
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
 
   def login
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
       session[:user_id] = @user.id
+      @user.events.each do |event|
+        event.expired?
+      end
       render json: @user, status: :created, location: @user
     else
       @error = "Invalid email adress or password"

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :groups, :events]
+  before_action :set_user, only: [:show, :groups, :events, :bills]
 
   # GET /users
   def index
@@ -22,6 +22,14 @@ class UsersController < ApplicationController
   def events
     @events = @user.events
     render json: @events
+  end
+
+  def bills
+    @user.events.each do |event|
+      event.expired?
+    end
+    @bills = @user.bills.where(satisfied?: false)
+    render json: @bills
   end
 
   # POST /users/:id/events

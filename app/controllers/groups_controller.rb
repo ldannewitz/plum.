@@ -24,7 +24,10 @@ class GroupsController < ApplicationController
 
   def add_members
     # iterate over array of members passed from front and make new members
-    p group_params['members']
+    group_params['members'].each do |member|
+      Membership.create(membership_id: Member.find_by(email: ?whatever comes from json), group_ip: self.id)
+    end
+
   end
 
   def events

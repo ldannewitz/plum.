@@ -43,6 +43,8 @@ class Event < ApplicationRecord
     total = 0
     expenses.each { |expense| total += expense.amount if expense.spender_id == member.id }
     total
+
+    # return expenses.reduce(0) { |total, expense| total + expense.amount if expense.spender_id == member.id }
   end
 
   # generate bill objects in the database
@@ -182,6 +184,10 @@ class Event < ApplicationRecord
       end
     end
     self.update_attributes(:settled? => true)
+  end
+
+  def tentative_balance(member)
+    find_member_total(self.expenses, member) - self.even_split
   end
 
 end

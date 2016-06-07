@@ -38,7 +38,7 @@ class Event < ApplicationRecord
   # find how much each member has already paid
   def find_member_total(expenses, member)
     total = 0
-    expenses.each { |expense| total += expense.amount if expense.spender_id == member.id }
+    expenses.each { |expense| total += expense.amount if expense.event_id == self.id && expense.spender_id == member.id }
     total
   end
 
@@ -50,7 +50,8 @@ class Event < ApplicationRecord
       # Get bill type
       bill_type = nil
       if bill[1] == 0
-        return 0
+        # If the user paid exactly their fair share...create a bill for them with amount 0
+        return @new_bill = Bill.create!(event_id: self.id, user_id: user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
       elsif bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
@@ -109,10 +110,11 @@ class Event < ApplicationRecord
     end # close create bill loop
   end # close generate_invoices method
 
+  # Check all invoices for an event that are typs "debit"
+  # If they have all be satisfied, payout the creditors
   def all_invoices_paid?
     all_paid = false
     self.bills.each do |bill|
-      p bill
       if bill.bill_type == 'debit' && bill.satisfied? == false
         return all_paid
       end
@@ -120,12 +122,14 @@ class Event < ApplicationRecord
     self.payout
   end
 
+  # Payout the creditors
   def payout
     self.bills.each do |bill|
       if bill.bill_type == 'credit'
         creditor = User.find(bill.user_id)
         email = creditor.email
 
+        # Set up PayPal client
         @api = PayPal::SDK::REST.set_config(
               :mode => "sandbox",
               :client_id => ENV['CLIENT_ID'],
@@ -150,9 +154,8 @@ class Event < ApplicationRecord
                   :sender_item_id => "2014031400023",
                 }]})
 
-        # Create Payment and return the status(true or false)
+        # Create Payment and return the status (true/false)
         if @payout.create
-          p @payout # Payout Id
           bill.update_attributes(:satisfied? => true, :paypal_id => "123")
           self.event_settled?
         else
@@ -162,7 +165,7 @@ class Event < ApplicationRecord
     end # Close bills.each loop
   end # Close payout method
 
-  # Update an event status to satisfied if all debtors and paid and all creditors have been paid
+  # Update an event status to satisfied when all debtors and paid and all creditors have been paid
   def event_settled?
     self.bills.each do |bill|
       if bill.satisfied? == false

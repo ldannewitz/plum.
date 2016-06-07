@@ -2,6 +2,7 @@ require 'paypal-sdk-invoice'
 require 'paypal-sdk-rest'
 include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
+
 class Bill < ApplicationRecord
   belongs_to :event
   belongs_to :user
@@ -10,6 +11,8 @@ class Bill < ApplicationRecord
 
   def get_invoice_details
     if self.bill_type == 'debit'
+
+      # Set up paypal client
       @api = PayPal::SDK::Invoice::API.new(
             :mode      => "sandbox",
             :app_id    => ENV['APP_ID'],

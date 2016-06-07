@@ -57,6 +57,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
+    chronic (0.10.2)
     clbustos-rtf (0.4.2)
     concurrent-ruby (1.0.2)
     coveralls (0.8.13)
@@ -247,6 +248,8 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -278,6 +281,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   statsample
   tzinfo-data
+  whenever
 
 RUBY VERSION
    ruby 2.2.4p230

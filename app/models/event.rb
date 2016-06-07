@@ -17,6 +17,7 @@ class Event < ApplicationRecord
 
   # is the event over? If so, generate_invoices
   def expired?
+    p "hi"
     # puts self.end_date
     # puts Time.now
     # puts self.end_date < Time.now

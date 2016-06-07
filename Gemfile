@@ -30,6 +30,7 @@ gem 'rails_12factor'
 
 gem 'paypal-sdk-rest'
 gem 'paypal-sdk-invoice'
+gem 'paypal-sdk-merchant'
 
 # Emails to clients
 gem 'sendgrid-ruby' #, :git => 'https://github.com/sendgrid/sendgrid-ruby', :branch => 'v3beta'

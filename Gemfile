@@ -32,8 +32,9 @@ gem 'paypal-sdk-rest'
 gem 'paypal-sdk-invoice'
 gem 'paypal-sdk-merchant'
 
+# Emails to clients
+gem 'sendgrid-ruby' #, :git => 'https://github.com/sendgrid/sendgrid-ruby', :branch => 'v3beta'
 gem 'statsample'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

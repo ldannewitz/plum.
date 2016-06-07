@@ -2,8 +2,11 @@ require 'paypal-sdk-rest'
 require 'paypal-sdk-invoice'
 include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
+require 'sendgrid-ruby'
+require 'send_grid.rb'
 
 class Event < ApplicationRecord
+  include SendGrid
   belongs_to :group
   has_many :memberships, through: :group
   has_many :members, through: :memberships, class_name: 'User'
@@ -97,6 +100,9 @@ class Event < ApplicationRecord
         if @create_and_send_invoice_response.success?
           @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
           @new_bill.save
+          send_email(@new_bill.paypal_invoice_id, email)
+          # p "yes"
+
           # p @create_and_send_invoice_response
           # @create_and_send_invoice_response.invoiceID
           # @create_and_send_invoice_response.invoiceNumber

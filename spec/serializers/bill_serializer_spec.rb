@@ -15,7 +15,7 @@ describe BillSerializer do
 
   it { should include(:event_id => 1) }
   it { should include(:user_id => 1) }
-  it { should include(:bill_type => 'credit') }
+  # it { should include(:bill_type => 'credit') }
   it { should include(:amount => 1.23) }
   it { should include(:satisfied? => false) }
 end

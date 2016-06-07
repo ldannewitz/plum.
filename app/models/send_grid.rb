@@ -1,4 +1,5 @@
 require 'sendgrid-ruby'
+require 'email_template'
 
 module SendGrid
   def send_email
@@ -6,59 +7,17 @@ module SendGrid
     # Create a new SendGrid client
     client = SendGrid::Client.new(api_key: ENV['SENDGRID_API_KEY'])
 
-    # Import invoice template
-    # template = SendGrid::Template.new('b5ee83e8-341b-4f59-b73c-cd496c514e48')
-    # p template
-
-    # recipients = [SendGrid::Recipient.new('lisa.dannewitz@gmail.com')]
-
-    # mail_defaults = {
-    #   from: 'dbcfsplum-facilitator@gmail.com',
-    #   # html: '<h1>I like email</h1>',
-    #   text: '#{Event.first.name}',
-    #   subject: 'Email is great'
-    # }
-
-    ugh = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" ><head><meta name="viewport" content="width=device-width" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Alerts e.g. approaching your limit</title></head><body style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0; padding: 0;" bgcolor="#f6f6f6">&#13;&#13;<table class="body-wrap" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>&#13;<td class="container" width="600" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; width: 100% !important; margin: 0 auto; padding: 0;" valign="top">&#13;<div class="content" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 0;">&#13;<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="alert alert-warning" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 26px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #905A90; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">&#13;<a style="text-decoration:none;color: #fff;" href="http://plumpayments.herokuapp.com">plum.</a>&#13;</td>&#13;</tr><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 10px;" valign="top">&#13;<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">&#13;You have a <strong style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">new invoice</strong> for &lt;%body%&gt;.&#13;</td>&#13;</tr><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">&#13;Head over to paypal to review your expenses.&#13;</td>&#13;</tr><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" align="center" valign="top">&#13;<a href="http://www.mailgun.com" class="btn-primary" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; font-style: oblique; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #6AAAA0; margin: 0; border-color: #6AAAA0; border-style: solid; border-width: 10px 20px;">View Paypal Invoice</a>&#13;</td>&#13;</tr><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"></tr></table></td>&#13;</tr></table><div class="footer" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 5px 20px;">&#13;<table width="100%" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="aligncenter content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">Made with love at DevBootCamp Chicago</td>&#13;</tr></table></div></div>&#13;</td>&#13;<td style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>&#13;</tr></table></body></html>'
-
     # Create a new Mail object and send:
     mail = SendGrid::Mail.new do |m|
-    # m.to = 'bplindgren91@gmail.com'
-    m.to = 'lisa.dannewitz@gmail.com'
-    m.from = 'dbcfsplum-facilitator@gmail.com'
-    m.subject = 'CSS test/does it interpolate? with x-smt'
-    # m.template = template
-    # m.smtpapi = template
-    # m.text = "#{Event.first.name}"
-    m.html = ugh
+      # m.to = 'bplindgren91@gmail.com'
+      m.to = 'lisa.dannewitz@gmail.com'
+      m.from = 'dbcfsplum-facilitator@gmail.com'
+      m.subject = 'Kind of working template?'
+      m.html = $TEMPLATE
     end
 
     res = client.send(mail)
     puts res.code
     puts res.body
-
-    # FIRST way
-    # res = mailer.mail(mail_defaults)
-
-    # SECOND way
-    # mailer = SendGrid::TemplateMailer.new(client, template, recipients)
-
-    # BETA way
-    # Create a new Mail object and send:
-    # from = Email.new(email: 'dbcfsplum-facilitator@gmail.com')
-    # to = Email.new(email: 'lisa.dannewitz@gmail.com')
-    # subject = 'UGH'
-    # content = Content.new(type: 'text/plain', value: 'from the other side')
-    # mail = Mail.new(from, subject, to, content)
-    # puts mail.to_json
-
-    #   # m.template_id = 'b5ee83e8-341b-4f59-b73c-cd496c514e48'
-    #   # m.text = "#{Event.first.name}"
-
-    # sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'], host: 'https://api.sendgrid.com')
-    # response = sg.client.mail._('send').beta.post(request_body: mail.to_json)
-    # puts response.status_code
-    # puts response.response_body
-    # puts response.response_headers
   end
 end

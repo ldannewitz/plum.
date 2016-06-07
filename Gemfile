@@ -30,6 +30,7 @@ gem 'rails_12factor'
 
 gem 'paypal-sdk-rest'
 gem 'paypal-sdk-invoice'
+gem 'paypal-sdk-merchant'
 
 gem 'statsample'
 

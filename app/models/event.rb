@@ -113,13 +113,17 @@ class Event < ApplicationRecord
   # Check all invoices for an event that are typs "debit"
   # If they have all be satisfied, payout the creditors
   def all_invoices_paid?
-    all_paid = false
-    self.bills.each do |bill|
-      if bill.bill_type == 'debit' && bill.satisfied? == false
-        return all_paid
+    if self.settled? == false
+      all_paid = false
+      self.bills.each do |bill|
+        if bill.bill_type == 'debit' && bill.satisfied? == false
+          return all_paid
+        end
       end
+      self.payout
+    else
+      p "This event is settled"
     end
-    self.payout
   end
 
   # Payout the creditors

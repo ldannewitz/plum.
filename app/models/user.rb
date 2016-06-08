@@ -10,8 +10,14 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
 
+  before_save :downcase_email
+
   def name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def downcase_email
+    self.email = self.email.downcase
   end
 
   # def tentative_balance_for_all_events

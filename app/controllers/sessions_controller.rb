@@ -1,9 +1,5 @@
 class SessionsController < ApplicationController
 
-  # def new
-  #   @user = User.new
-  # end
-
   def login
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
@@ -20,7 +16,7 @@ class SessionsController < ApplicationController
 
   def logout
     session.clear
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   private

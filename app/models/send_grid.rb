@@ -15,7 +15,7 @@ module SendGrid
       # m.to = 'bplindgren91@gmail.com'
       m.to = to_email
       m.from = 'dbcfsplum-facilitator@gmail.com'
-      m.subject = 'bottom thing centered?'
+      m.subject = 'plum. invoice'
       m.html = template
     end
 

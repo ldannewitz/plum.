@@ -9,4 +9,12 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
+
+  # def tentative_balance_for_all_events
+  #   total = 0
+  #   self.events.each do |event|
+  #     total += find_member_total(event.expenses, self) - event.even_split
+  #   end
+  #   total
+  # end
 end

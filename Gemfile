@@ -36,8 +36,6 @@ gem 'paypal-sdk-merchant'
 gem 'sendgrid-ruby' #, :git => 'https://github.com/sendgrid/sendgrid-ruby', :branch => 'v3beta'
 # gem 'statsample'
 
-gem 'whenever', :require => false
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

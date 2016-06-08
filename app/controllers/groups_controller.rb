@@ -1,9 +1,7 @@
 class GroupsController < ApplicationController
 
   def create
-    p params[:userId]
     @user = User.find(params[:userId])
-    p @user
     @group = Group.new(group_params)
     # @group = @user.groups.new(name: group_params[:name])
     if @group.save

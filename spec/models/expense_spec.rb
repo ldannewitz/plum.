@@ -38,14 +38,6 @@ RSpec.describe Expense, type: :model do
 
   describe '#update_total' do
     it 'updates event total' do
-      p member
-      p group
-      p membership
-      p event
-      p expense
-
-      p User.all.count
-
       expect{expense.save!}.to change {expense.event.total}
     end
   end

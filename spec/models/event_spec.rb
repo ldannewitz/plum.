@@ -108,4 +108,29 @@ RSpec.describe Event, type: :model do
   #   end
   # end
 
+  describe '#all_bills_paid?' do
+    it "returns nil if an event has no bills" do
+      expect(@event.all_bills_paid?).to be_empty
+    end
+
+    it "returns false if all of event's invoices are not satisfied" do
+      @event.expenses << Expense.find_or_create_by!(event_id: @event.id, spender_id: @member.id, description: "gas", amount: 27.34, location: "Chicago")
+      Bill.create!(event: @event, user: @member, bill_type: 'debit', amount: 4567.89, satisfied?: false)
+      expect(@event.all_bills_paid?).to eq(false)
+    end
+
+    it "returns settled if event's invoices and payouts are satisfied" do
+      @event.update(settled?: true)
+      expect(@event.all_bills_paid?).to eq("This event is settled")
+    end
+  end
+
+  describe '#settle_event' do
+    it 'settles an event when all of its bills are satisfied' do
+      @event.expenses << Expense.find_or_create_by!(event_id: @event.id, spender_id: @member.id, description: "gas", amount: 27.34, location: "Chicago")
+      Bill.create!(event: @event, user: @member, bill_type: 'debit', amount: 4567.89, satisfied?: true)
+      expect{@event.settle_event}.to change(@event, :settled?)
+    end
+  end
+
 end

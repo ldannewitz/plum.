@@ -6,8 +6,8 @@ class Group < ApplicationRecord
 
   validates :name, presence: true
 
-  def add_members(new_members, creator)
-    new_members << User.find(creator)
+  def add_members(new_members, creator_id)
+    new_members << User.find(creator_id)
     new_members.each do |member|
       self.members << User.find_by(email: member[:email])
     end

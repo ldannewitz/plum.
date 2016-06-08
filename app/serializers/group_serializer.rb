@@ -18,4 +18,17 @@ class GroupSerializer < ActiveModel::Serializer
     end
     array
   end
+
+  def events
+    array = []
+    object.events.each do |event|
+      info = []
+      info << {"id": event.id}
+      info << {"name": event.name}
+      info << {"settled": event.settled?}
+      info << {"tentative_balance": event.tentative_balance(object)}
+      array << info
+    end
+    array
+  end
 end

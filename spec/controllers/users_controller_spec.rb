@@ -69,9 +69,11 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "loads a user's groups into @groups" do
-      groups = user.groups
-      get :groups, params: { id: user.id }
-      expect(assigns(:groups)).to match_array(groups)
+      silence_stream(STDOUT) do
+        groups = user.groups
+        get :groups, params: { id: user.id }
+        expect(assigns(:groups)).to match_array(groups)
+      end
     end
   end
 

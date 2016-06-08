@@ -9,23 +9,33 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
+    @user.events.each do |event|
+      event.expired?
+    end
     render json: @user
   end
 
   # GET /users/:id/groups
   def groups
+    @user.events.each do |event|
+      event.expired?
+    end
     @groups = @user.groups
     render json: @groups
   end
 
   # GET /users/:id/events
   def events
+    @user.events.each do |event|
+      event.expired?
+    end
     @events = @user.events
     render json: @events
   end
 
   def bills
     @user.events.each do |event|
+      p event
       event.expired?
     end
     @bills = @user.bills.where(satisfied?: false)

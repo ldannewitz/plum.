@@ -1,5 +1,5 @@
-User.destory_all
-Group.destory_all
+# User.destory_all
+# Group.destory_all
 
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
@@ -31,10 +31,10 @@ m7 = Membership.create!(member_id: jon.id, group_id: dbc.id)
 m8 = Membership.create!(member_id: tom.id, group_id: dbc.id)
 m9 = Membership.create!(member_id: lisa.id, group_id: dbc.id)
 
-m10 = Membership.create!(member_id: liz.id, group_id: bachelorette.id)
-m11 = Membership.create!(member_id: beyonce.id, group_id: bachelorette.id)
-m12 = Membership.create!(member_id: charlotte.id, group_id: bachelorette.id)
-m13 = Membership.create!(member_id: brad.id, group_id: bachelorette.id)
+m10 = Membership.create!(member_id: liz.id, group_id: destinyschild.id)
+m11 = Membership.create!(member_id: beyonce.id, group_id: destinyschild.id)
+m12 = Membership.create!(member_id: charlotte.id, group_id: destinyschild.id)
+m13 = Membership.create!(member_id: brad.id, group_id: destinyschild.id)
 
 
 roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs)
@@ -42,14 +42,15 @@ rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), e
 tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
 
 
-x1 = Expense.find_or_create_by!(event_id: event.id, spender_id: rizzo.id, description: "gas", amount: 27.34, location: "Chicago")
-x2 = Expense.find_or_create_by!(event_id: event.id, spender_id: rizzo.id, description: "dinner", amount: 58.21, location: "Des Moines")
-x3 = Expense.find_or_create_by!(event_id: event.id, spender_id: rizzo.id, description: "hotel", amount: 117.86, location: "Omaha")
-x4 = Expense.find_or_create_by!(event_id: event.id, spender_id: kris.id, description: "gas", amount: 96.53, location: "Des Moines")
-x5 = Expense.find_or_create_by!(event_id: event.id, spender_id: kris.id, description: "food", amount: 60.34, location: "Davenport")
-x6 = Expense.find_or_create_by!(event_id: event.id, spender_id: addison.id, description: "snacks", amount: 5.21, location: "DeKalb")
-x7 = Expense.find_or_create_by!(event_id: event.id, spender_id: addison.id, description: "gatorade", amount: 3.28, location: "DeKalb")
-x8 = Expense.find_or_create_by!(event_id: event.id, spender_id: david.id, description: "tums", amount: 3.65, location: "DeKalb")
+x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "gas", amount: 27.34, location: "Chicago")
+x2 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "dinner", amount: 58.21, location: "Des Moines")
+x3 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "hotel", amount: 117.86, location: "Omaha")
+x4 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "gas", amount: 96.53, location: "Des Moines")
+x5 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "food", amount: 60.34, location: "Davenport")
+x6 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: addison.id, description: "snacks", amount: 5.21, location: "DeKalb")
+x7 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: addison.id, description: "gatorade", amount: 3.28, location: "DeKalb")
+x8 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: david.id, description: "tums", amount: 3.65, location: "DeKalb")
+
 x9 = Expense.create!(event_id: rafting.id, spender_id: brad.id, description: "boat rental", amount: 73.65, location: "Dubuque")
 x10 = Expense.create!(event_id: rafting.id, spender_id: jon.id, description: "food", amount: 14.22, location: "Dubuque")
 x11 = Expense.create!(event_id: rafting.id, spender_id: lisa.id, description: "drinks", amount: 13.15, location: "Dubuque")

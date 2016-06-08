@@ -3,8 +3,10 @@ require 'paypal-sdk-rest'
 require 'paypal-sdk-merchant'
 include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
+include ActionController::HttpAuthentication::Token::ControllerMethods
 
 class Bill < ApplicationRecord
+
   belongs_to :event
   belongs_to :user
 
@@ -76,5 +78,6 @@ class Bill < ApplicationRecord
   #     @get_transaction_details_response.Errors
   #   end
   # end
+
 
 end

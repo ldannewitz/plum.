@@ -3,7 +3,7 @@ require 'sendgrid-ruby'
 module SendGrid
   def send_email(paypal_invoice_id, to_email)
     @event_name = self.name
-    @url = "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{paypal_invoice_id}"
+    @url = "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{paypal_id}"
 
     # Create a new SendGrid client
     client = SendGrid::Client.new(api_key: ENV['SENDGRID_API_KEY'])

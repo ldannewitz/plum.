@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  # include ActionController::Serialization
+  include ActionController::Serialization
   # include ActionController::HttpAuthentication::Token::ControllerMethods
   # before_action :authenticate
 
@@ -27,3 +27,4 @@ class ApplicationController < ActionController::API
   #     render json: 'Bad credentials', status: 401
   #   end
 end
+

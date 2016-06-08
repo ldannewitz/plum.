@@ -24,3 +24,4 @@ module SendGrid
     puts res.body
   end
 end
+

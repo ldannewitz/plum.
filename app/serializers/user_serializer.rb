@@ -50,6 +50,8 @@ class UserSerializer < ActiveModel::Serializer
         info = []
         info << {"amount": bill.amount}
         info << {"for_event": bill.event.name}
+        info << {"paypalUrl": bill.paypalUrl}
+        info << {"groupName": bill.groupName}
         array << info
       end
     end

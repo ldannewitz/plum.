@@ -20,6 +20,11 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
+    # test "should render user serializer" do
+    #   get :index
+    #   assert_serializer UserSerializer, nil
+    # end
+
     # it "should serialize users JSON" do
     #   get :index
     #   expect(response.body).to eq(USERS_JSON)
@@ -137,3 +142,10 @@ RSpec.describe UsersController, :type => :controller do
   #   end
   # end
 end
+
+# class UsersControllerTest < ActionController::TestCase
+#   test "should render user serializer" do
+#     get :index
+#     assert_serializer "UserSerializer"
+#   end
+# end

@@ -11,6 +11,14 @@ class Bill < ApplicationRecord
 
   validates :event_id, :user_id, :bill_type, :amount, presence: true
 
+  def paypalUrl
+    "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{self.paypal_id}"
+  end
+
+  def groupName
+    self.event.group.name
+  end
+
   # def get_bill_details
   #   self.bill_type == 'debit' ? self.get_invoice_details : self.get_payout_info
   # end

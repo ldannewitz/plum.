@@ -17,7 +17,6 @@ class Event < ApplicationRecord
 
   # is the event over? If so, generate_invoices
   def expired?
-      p "hi"
     # puts self.end_date
     # puts Time.now
     # puts self.end_date < Time.now
@@ -117,7 +116,7 @@ class Event < ApplicationRecord
 
   # Check all invoices for an event that are typs "debit"
   # If they have all be satisfied, payout the creditors
-  def all_invoices_paid?
+  def all_bills_paid?
     if self.settled? == false
       all_paid = false
       self.bills.each do |bill|
@@ -127,7 +126,7 @@ class Event < ApplicationRecord
       end
       self.payout
     else
-      p "This event is settled"
+      "This event is settled"
     end
   end
 

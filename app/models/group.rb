@@ -9,7 +9,7 @@ class Group < ApplicationRecord
   def add_members(new_members, creator_id)
     new_members << User.find(creator_id)
     new_members.each do |member|
-      self.members << User.find_by(email: member[:email])
+      self.members << User.find_by(email: member[:email].downcase)
     end
     self.save
   end

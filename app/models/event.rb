@@ -61,7 +61,7 @@ class Event < ApplicationRecord
       end
 
       # create bill object
-      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
+      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2))
 
       # for the users that owe money, create an invoice using PayPal API
       if bill_type == 'debit'

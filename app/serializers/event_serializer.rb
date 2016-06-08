@@ -26,6 +26,7 @@ class EventSerializer < ActiveModel::Serializer
       # info << {"id": expense.id}
       info << {"description": expense.description}
       info << {"amount": expense.amount}
+      info << {"location": expense.location}
       array << info
     end
     array

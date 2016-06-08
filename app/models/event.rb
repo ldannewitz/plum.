@@ -53,7 +53,7 @@ class Event < ApplicationRecord
       bill_type = nil
       if bill[1] == 0
         # If the user paid exactly their fair share...create a bill for them with amount 0
-        return @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
+        return @new_bill = Bill.find_or_create_by(event_id: self.id, user_id: @user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
       elsif bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
@@ -61,10 +61,11 @@ class Event < ApplicationRecord
       end
 
       # create bill object
-      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2))
+      @new_bill = Bill.find_by(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2))
 
       # for the users that owe money, create an invoice using PayPal API
-      if @new_bill.create # prevent duplicate paypal invoices
+      if @new_bill.nil? # prevent duplicate paypal invoices
+        @new_bill = Bill.create(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2))
         if bill_type == 'debit'
           event_name = self.name
           email = @user.email

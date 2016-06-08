@@ -11,11 +11,11 @@ class Bill < ApplicationRecord
 
   validates :event_id, :user_id, :bill_type, :amount, presence: true
 
-  def paypalUrl
+  def paypalurl
     "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{self.paypal_id}"
   end
 
-  def groupName
+  def groupname
     self.event.group.name
   end
 

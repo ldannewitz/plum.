@@ -25,7 +25,7 @@ class GroupSerializer < ActiveModel::Serializer
       info << {"id": event.id}
       info << {"name": event.name}
       info << {"settled": event.settled?}
-      info << {"tentative_balance": event.tentative_balance(object)}
+      info << {"tentativebalance": event.tentativebalance(object)}
       array << info
     end
     array

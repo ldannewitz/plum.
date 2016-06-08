@@ -25,7 +25,7 @@ class UserSerializer < ActiveModel::Serializer
       info << {"id": event.id}
       info << {"name": event.name}
       info << {"settled": event.settled?}
-      info << {"tentative_balance": event.tentative_balance(object)}
+      info << {"tentativebalance": event.tentativebalance(object)}
       array << info
     end
     array
@@ -50,8 +50,8 @@ class UserSerializer < ActiveModel::Serializer
         info = []
         info << {"amount": bill.amount}
         info << {"for_event": bill.event.name}
-        info << {"paypalUrl": bill.paypalUrl}
-        info << {"groupName": bill.groupName}
+        info << {"paypalurl": bill.paypalurl}
+        info << {"groupname": bill.groupname}
         array << info
       end
     end

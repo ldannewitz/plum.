@@ -183,7 +183,7 @@ class Event < ApplicationRecord
     self.update_attributes(:settled? => true)
   end
 
-  def tentative_balance(member)
+  def tentativebalance(member)
     (find_member_total(self.expenses, member) - self.even_split).round(2)
   end
 end

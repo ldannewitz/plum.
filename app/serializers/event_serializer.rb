@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_date, :end_date, :settled?, :group_id, :total #, :tentative_balance
+  attributes :id, :name, :start_date, :end_date, :settled?, :group_id, :total #, :tentativebalance
 
   belongs_to :group
   has_many :members
@@ -8,12 +8,14 @@ class EventSerializer < ActiveModel::Serializer
 
   def members
     array = []
+    @event = Event.find_by(name: object.name)
     object.members.each do |member|
       info = []
       # info << {"id": member.id}
       info << {"first_name": member.first_name}
       info << {"last_name": member.last_name}
       info << {"full_name": "#{member.first_name} #{member.last_name}"}
+      info << {"tentativebalance": @event.tentativebalance(member)}
       array << info
     end
     array
@@ -45,4 +47,9 @@ class EventSerializer < ActiveModel::Serializer
     end
     array
   end
+
+  # def tentativebalance
+  #   member = User.find(event.)
+  #   (find_member_total(object.expenses, member) - self.even_split).round(2)
+  # end
 end

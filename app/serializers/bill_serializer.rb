@@ -1,5 +1,5 @@
 class BillSerializer < ActiveModel::Serializer
-  attributes :id, :event, :user, :amount, :satisfied?, :paypalUrl, :groupName
+  attributes :id, :event, :user, :amount, :satisfied?, :paypalurl, :groupname
 
   # belongs_to :event
   # belongs_to :user

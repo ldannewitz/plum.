@@ -44,6 +44,7 @@ class UsersController < ApplicationController
   # POST /users/:id/events
   def new_event
     @event = Event.new(event_params)
+    @event.group = Group.find_by(name: event_params[:group])
 
     if @event.save
       render json: @event, status: :created, location: @event
@@ -78,8 +79,7 @@ class UsersController < ApplicationController
   end
 
   def event_params
-    params.permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
+    params.permit(:name, :start_date, :end_date, :group)
   end
 
 end
-

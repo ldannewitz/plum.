@@ -64,53 +64,54 @@ class Event < ApplicationRecord
       @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2))
 
       # for the users that owe money, create an invoice using PayPal API
-      if bill_type == 'debit'
-        event_name = self.name
-        email = @user.email
-        unit_price = (@new_bill.amount * (-1))
+      if @new_bill.create # prevent duplicate paypal invoices
+        if bill_type == 'debit'
+          event_name = self.name
+          email = @user.email
+          unit_price = (@new_bill.amount * (-1))
 
-        # Set up PayPal client
-        @api = PayPal::SDK::Invoice::API.new(
-          :mode      => "sandbox",
-          :app_id    => ENV['APP_ID'],
-          :username  => ENV['USERNAME'],
-          :password  => ENV['PASSWORD'],
-          :signature => ENV['SIGNATURE'])
+          # Set up PayPal client
+          @api = PayPal::SDK::Invoice::API.new(
+            :mode      => "sandbox",
+            :app_id    => ENV['APP_ID'],
+            :username  => ENV['USERNAME'],
+            :password  => ENV['PASSWORD'],
+            :signature => ENV['SIGNATURE'])
 
-        # Build request object
-        @create_and_send_invoice = @api.build_create_and_send_invoice({
-          :invoice => {
-            :merchantEmail => ENV['MERCHANT_EMAIL'],
-            :payerEmail => email,
-            :itemList => {
-                :item => [{ "name": event_name,
-                            "quantity": "1",
-                            "unitPrice": unit_price
-                          }]
-                          },
-            :currencyCode => "USD",
-            :paymentTerms => "DueOnReceipt" } })
+          # Build request object
+          @create_and_send_invoice = @api.build_create_and_send_invoice({
+            :invoice => {
+              :merchantEmail => ENV['MERCHANT_EMAIL'],
+              :payerEmail => email,
+              :itemList => {
+                  :item => [{ "name": event_name,
+                              "quantity": "1",
+                              "unitPrice": unit_price
+                            }]
+                            },
+              :currencyCode => "USD",
+              :paymentTerms => "DueOnReceipt" } })
 
-        # Make API call & get response
-        @create_and_send_invoice_response = @api.create_and_send_invoice(@create_and_send_invoice)
+          # Make API call & get response
+          @create_and_send_invoice_response = @api.create_and_send_invoice(@create_and_send_invoice)
 
-        # Access Response
-        if @create_and_send_invoice_response.success?
-          @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
-          @new_bill.save
-          send_email(@new_bill.paypal_id, email)
-          # p "yes"
+          # Access Response
+          if @create_and_send_invoice_response.success?
+            @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
+            @new_bill.save
+            send_email(@new_bill.paypal_id, email)
+            # p "yes"
 
-          # p @create_and_send_invoice_response
-          # @create_and_send_invoice_response.invoiceID
-          # @create_and_send_invoice_response.invoiceNumber
-          # @create_and_send_invoice_response.invoiceURL
-          # @create_and_send_invoice_response.totalAmount
-        else
-          @create_and_send_invoice_response.error
-        end # close response loop
-
-      end # close API call
+            # p @create_and_send_invoice_response
+            # @create_and_send_invoice_response.invoiceID
+            # @create_and_send_invoice_response.invoiceNumber
+            # @create_and_send_invoice_response.invoiceURL
+            # @create_and_send_invoice_response.totalAmount
+          else
+            @create_and_send_invoice_response.error
+          end # close response loop
+        end # close API call
+      end # close IF loop
     end # close create bill loop
   end # close generate_invoices method
 

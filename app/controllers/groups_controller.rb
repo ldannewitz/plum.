@@ -3,9 +3,9 @@ class GroupsController < ApplicationController
   def create
     @user = User.find(params[:userId])
     @group = Group.new(group_params)
+    @group.add_members(params[:members], params[:userId])
     # @group = @user.groups.new(name: group_params[:name])
     if @group.save
-      @group.add_members(params[:members], params[:userId])
       render json: @group, status: :created, location: @group
     else
       render json: @group.errors, status: :unprocessable_entity
@@ -36,4 +36,3 @@ class GroupsController < ApplicationController
   end
 
 end
-

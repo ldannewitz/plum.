@@ -20,7 +20,6 @@ describe BillSerializer, :type => :serializer do
 
   it { should include(:event => "Rafting") }
   it { should include(:user => kris.id) }
-  # it { should include(:bill_type => 'credit') }
   it { should include(:amount => 1.23) }
   it { should include(:satisfied? => false) }
   # it { should include(:paypal_url => "https://www.sandbox.paypal.com/us/cgi_bin/?cmd=_pay-inv&id=INV2-MTJR-D2UY-QTGZ-XZE5") }

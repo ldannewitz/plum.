@@ -1,7 +1,7 @@
 require 'sendgrid-ruby'
 
 module SendGrid
-  def send_email(paypal_invoice_id, to_email)
+  def send_email(paypal_id, to_email)
     @event_name = self.name
     @url = "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{paypal_id}"
 
@@ -24,3 +24,4 @@ module SendGrid
     puts res.body
   end
 end
+

@@ -1,3 +1,4 @@
+require 'securerandom'
 class User < ApplicationRecord
   has_secure_password
 
@@ -27,4 +28,6 @@ class User < ApplicationRecord
   #   end
   #   total
   # end
+
 end
+

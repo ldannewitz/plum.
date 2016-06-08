@@ -4,3 +4,4 @@ class EventsController < ApplicationController
     render json: @event
   end
 end
+

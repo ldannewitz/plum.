@@ -186,5 +186,4 @@ class Event < ApplicationRecord
   def tentative_balance(member)
     (find_member_total(self.expenses, member) - self.even_split).round(2)
   end
-
 end

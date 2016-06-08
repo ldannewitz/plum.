@@ -36,7 +36,6 @@ class UsersController < ApplicationController
 
   def bills
     @user.events.each do |event|
-      p event
       event.expired?
     end
     @bills = @user.bills.where(satisfied?: false)

@@ -63,13 +63,6 @@ RSpec.configure do |config|
     mocks.syntax = :should
   end
 
-  # config.after :all do
-  #   # ActiveRecord::Base.subclasses.each(&:delete_all)
-  #   # puts 'testing 123'
-  #   # system 'bundle exec rake db:schema:load RAILS_ENV=test'
-  #   # ActiveRecord::Base.subclasses.each(&:delete_all)
-  # end
-
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

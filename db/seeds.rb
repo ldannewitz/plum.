@@ -1,9 +1,11 @@
+User.destory_all
+Group.destory_all
+
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
 david = User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password", phone: "4444444444")
 dexter = User.create!(first_name: "Dexter", last_name: "Fowler", email: "yaboidex@gmail.com", password: "password", phone: "5555555555")
-
 
 brad = User.create!(first_name: "Brad", last_name: "Lindgren", email: "brad@gmail.com", password: "password", phone: "6666666666")
 jon = User.create!(first_name: "Jon", last_name: "Kaplan", email: "jon@gmail.com", password: "password", phone: "7777777777")
@@ -16,7 +18,7 @@ charlotte = User.create!(first_name: "Charlotte", last_name: "Smith", email: "ch
 
 cubs = Group.find_or_create_by!(name: "Cubs")
 dbc = Group.find_or_create_by!(name: "DBC")
-destinyschild = Group.find_or_create_by!(name: "Bachelorette")
+destinyschild = Group.find_or_create_by!(name: "Destiny's Child")
 
 m1 = Membership.find_or_create_by!(member_id: rizzo.id, group_id: cubs.id)
 m2 = Membership.find_or_create_by!(member_id: kris.id, group_id: cubs.id)
@@ -37,7 +39,7 @@ m13 = Membership.create!(member_id: brad.id, group_id: bachelorette.id)
 
 roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs)
 rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 10), settled?: false, group: dbc)
-tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: bachelorette)
+tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
 
 
 x1 = Expense.find_or_create_by!(event_id: event.id, spender_id: rizzo.id, description: "gas", amount: 27.34, location: "Chicago")

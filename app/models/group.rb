@@ -1,9 +1,8 @@
 class Group < ApplicationRecord
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :members, through: :memberships, class_name: 'User'
-  has_many :events
+  has_many :events, dependent: :destroy
   has_many :expenses, through: :events
-  # belongs_to :user, class_name: "User"
 
   validates :name, presence: true
 

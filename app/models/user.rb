@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :memberships, foreign_key: :member_id
+  has_many :memberships, foreign_key: :member_id, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :events, through: :groups
   has_many :expenses, foreign_key: :spender_id

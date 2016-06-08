@@ -10,8 +10,8 @@ class Event < ApplicationRecord
   belongs_to :group
   has_many :memberships, through: :group
   has_many :members, through: :memberships, class_name: 'User'
-  has_many :expenses
-  has_many :bills
+  has_many :expenses, dependent: :destroy
+  has_many :bills, dependent: :destroy
 
   validates :name, :start_date, :end_date, :group_id, :total, presence: true
 

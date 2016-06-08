@@ -22,13 +22,13 @@ class User < ApplicationRecord
     self.email = self.email.downcase
   end
 
-  def tentative_balance_for_all_events
-    total = 0
-    self.events.each do |event|
-      total += find_member_total(event.expenses, self) - event.even_split
-    end
-    total
-  end
+  # def tentative_balance_for_all_events
+  #   total = 0
+  #   self.events.each do |event|
+  #     total += find_member_total(event.expenses, self) - event.even_split
+  #   end
+  #   total
+  # end
 
   # private
 

@@ -5,6 +5,7 @@ include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
 
 class Bill < ApplicationRecord
+
   belongs_to :event
   belongs_to :user
 
@@ -84,5 +85,6 @@ class Bill < ApplicationRecord
   #     @get_transaction_details_response.Errors
   #   end
   # end
+
 
 end

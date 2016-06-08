@@ -67,3 +67,4 @@ x20 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Food"
 x21 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Drinks", amount: 175.06, location: "Los Angeles")
 x22 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Diesel", amount: 177.65, location: "Denver")
 x23 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Food", amount: 33.65, location: "Des Moines")
+

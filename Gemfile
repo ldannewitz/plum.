@@ -67,3 +67,4 @@ group :test do
   # Verify JSON APIs
   gem 'json-schema'
 end
+

@@ -3,7 +3,6 @@ require 'paypal-sdk-rest'
 require 'paypal-sdk-merchant'
 include PayPal::SDK::REST
 include PayPal::SDK::Core::Logging
-include ActionController::HttpAuthentication::Token::ControllerMethods
 
 class Bill < ApplicationRecord
 

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :groups, :events, :bills]
-  before_action :authenticate
 
   # GET /users
   def index
@@ -82,30 +81,4 @@ class UsersController < ApplicationController
     params.permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
   end
 
-  protected
-
-  def authenticate
-    p token
-  end
-
-  def authenticate_token
-    User.find_by(auth_token: token)
-  end
-
-  # def authenticate_preview_realm
-  #   authenticate_or_request_with_http_token('Preview') do |token, options|
-  #     User.find_by(auth_token: token)
-  #   end
-  # end
-
-  # def authenticate_banana_realm
-  #   authenticate_token || render_unauthorized('Banana')
-  # end
-
-  def render_unauthorized(realm=nil)
-    if realm
-      self.headers['WWW-Authenticate'] = %(Token realm="#{realm.gsub(/"/, "")}")
-    end
-    render json: 'Bad credentials', status: 401
-  end
 end

@@ -10,6 +10,10 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   # def tentative_balance_for_all_events
   #   total = 0
   #   self.events.each do |event|

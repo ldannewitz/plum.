@@ -50,11 +50,13 @@ class UserSerializer < ActiveModel::Serializer
 
   def bills
     array = []
-    object.bills.each do |bill|
-      info = []
-      info << {"amount": bill.amount}
-      info << {"for_event": bill.event.name}
-      array << info
+    unless object.bills.nil?
+      object.bills.each do |bill|
+        info = []
+        info << {"amount": bill.amount}
+        info << {"for_event": bill.event.name}
+        array << info
+      end
     end
     array
   end

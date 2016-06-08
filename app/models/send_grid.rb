@@ -1,5 +1,4 @@
 require 'sendgrid-ruby'
-require 'email_template'
 
 module SendGrid
   def send_email(paypal_invoice_id, to_email)

@@ -69,13 +69,7 @@ class UsersController < ApplicationController
   end
 
   def event_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse(params.as_json, only: [:name, :start_date, :end_date, :settled?, :group_id, :total] )
-
-    # ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [ ['data']['attributes']['name'], ['data']['attributes']['start_date'].DateTime, ['data']['attributes']['end_date'].DateTime, ['data']['attributes']['settled?'], ['data']['attributes']['group_id'].to_i, ['data']['attributes']['total'].to_i ])
+    params.permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
   end
-
-  # def event_params
-  #   params.require(:event).permit(:name, :start_date, :end_date, :settled?, :group_id, :total)
-  # end
 
 end

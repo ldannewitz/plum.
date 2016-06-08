@@ -34,7 +34,7 @@ gem 'paypal-sdk-merchant'
 
 # Emails to clients
 gem 'sendgrid-ruby' #, :git => 'https://github.com/sendgrid/sendgrid-ruby', :branch => 'v3beta'
-gem 'statsample'
+# gem 'statsample'
 
 gem 'whenever', :require => false
 

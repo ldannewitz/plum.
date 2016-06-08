@@ -1,3 +1,5 @@
+User.destory
+
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
@@ -15,7 +17,7 @@ charlotte = User.create!(first_name: "Charlotte", last_name: "Smith", email: "ch
 
 cubs = Group.create!(name: "Cubs")
 dbc = Group.create!(name: "DBC")
-destinyschild = Group.create!(name: "Bachelorette")
+destinyschild = Group.create!(name: "Destiny's Child")
 
 m1 = Membership.create!(member_id: rizzo.id, group_id: cubs.id)
 m2 = Membership.create!(member_id: kris.id, group_id: cubs.id)
@@ -36,7 +38,7 @@ m13 = Membership.create!(member_id: brad.id, group_id: bachelorette.id)
 
 roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs)
 rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 10), settled?: false, group: dbc)
-tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: bachelorette)
+tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
 
 
 x1 = Expense.create!(event_id: roadtrip.id, spender_id: rizzo.id, description: "gas", amount: 27.34, location: "Chicago")

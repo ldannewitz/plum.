@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
-  include ActionController::Serialization
-  include ActionController::HttpAuthentication::Token::ControllerMethods
+  # include ActionController::Serialization
+  # include ActionController::HttpAuthentication::Token::ControllerMethods
   # before_action :authenticate
 
   protected

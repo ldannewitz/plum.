@@ -40,11 +40,8 @@ class Event < ApplicationRecord
 
   # find how much each member has already paid
   def find_member_total(expenses, member)
-    total = 0
-    expenses.each { |expense| total += expense.amount if expense.spender_id == member.id }
-    total
-
-    # return expenses.reduce(0) { |total, expense| total + expense.amount if expense.spender_id == member.id }
+    relevant_expenses = expenses.select {|expense| expense.spender_id == member.id }
+    relevant_expenses.reduce(0) { |total, expense| total + expense.amount }
   end
 
   # generate bill objects in the database

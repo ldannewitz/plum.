@@ -5,7 +5,7 @@ class Group < ApplicationRecord
   has_many :expenses, through: :events
 
   validates :name, presence: true
-  before_save :validate_members
+  validate :validate_members
 
   def add_members(new_members, creator_id)
     new_members << User.find(creator_id)
@@ -16,6 +16,8 @@ class Group < ApplicationRecord
   end
 
   def validate_members
-    
+    if self.members.count == 0
+      errors.add(:members, 'A group has to have members')
+    end
   end
 end

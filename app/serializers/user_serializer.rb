@@ -35,4 +35,27 @@ class UserSerializer < ActiveModel::Serializer
     end
     array
   end
+
+  def expenses
+    array = []
+    object.expenses.each do |expense|
+      info = []
+      info << {"description": expense.description}
+      info << {"amount": expense.amount}
+      info << {"for_event": expense.event.name}
+      array << info
+    end
+    array
+  end
+
+  def bills
+    array = []
+    object.bills.each do |bill|
+      info = []
+      info << {"amount": bill.amount}
+      info << {"for_event": bill.event.name}
+      array << info
+    end
+    array
+  end
 end

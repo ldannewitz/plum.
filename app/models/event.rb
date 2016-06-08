@@ -53,7 +53,7 @@ class Event < ApplicationRecord
       bill_type = nil
       if bill[1] == 0
         # If the user paid exactly their fair share...create a bill for them with amount 0
-        return @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
+        return @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: 'debit', amount: 0.round(2), satisfied?: true)
       elsif bill[1] > 0
         bill_type = 'credit'
       elsif bill[1] < 0
@@ -61,7 +61,7 @@ class Event < ApplicationRecord
       end
 
       # create bill object
-      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
+      @new_bill = Bill.find_or_create_by!(event_id: self.id, user_id: @user.id, bill_type: bill_type, amount: bill[1].round(2), satisfied?: false)
 
       # for the users that owe money, create an invoice using PayPal API
       if bill_type == 'debit'
@@ -184,7 +184,7 @@ class Event < ApplicationRecord
   end
 
   def tentative_balance(member)
-    find_member_total(self.expenses, member) - self.even_split
+    (find_member_total(self.expenses, member) - self.even_split).round(2)
   end
 
 end

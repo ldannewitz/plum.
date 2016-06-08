@@ -1,8 +1,8 @@
-rizzo = User.find_or_create_by!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
-kris = User.find_or_create_by!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
-addison = User.find_or_create_by!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
-david = User.find_or_create_by!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password", phone: "4444444444")
-dexter = User.find_or_create_by!(first_name: "Dexter", last_name: "Fowler", email: "yaboidex@gmail.com", password: "password", phone: "5555555555")
+rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
+kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
+addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
+david = User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password", phone: "4444444444")
+dexter = User.create!(first_name: "Dexter", last_name: "Fowler", email: "yaboidex@gmail.com", password: "password", phone: "5555555555")
 
 cubs = Group.find_or_create_by!(name: "Cubs")
 

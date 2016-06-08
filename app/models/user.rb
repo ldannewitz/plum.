@@ -22,23 +22,23 @@ class User < ApplicationRecord
     self.email = self.email.downcase
   end
 
-  # def tentative_balance_for_all_events
-  #   total = 0
-  #   self.events.each do |event|
-  #     total += find_member_total(event.expenses, self) - event.even_split
-  #   end
-  #   total
+  def tentative_balance_for_all_events
+    total = 0
+    self.events.each do |event|
+      total += find_member_total(event.expenses, self) - event.even_split
+    end
+    total
+  end
+
+  # private
+
+  # def set_auth_token
+  #   return if auth_token.present?
+  #   self.auth_token = generate_auth_token
   # end
 
-  private
-
-  def set_auth_token
-    return if auth_token.present?
-    self.auth_token = generate_auth_token
-  end
-
-  def generate_auth_token
-    SecureRandom.hex(15)
-  end
+  # def generate_auth_token
+  #   SecureRandom.hex(15)
+  # end
 
 end

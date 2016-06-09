@@ -43,8 +43,9 @@ class UsersController < ApplicationController
 
   # POST /users/:id/events
   def new_event
+    group = Group.find_by(name:params[:group])
     @event = Event.new(event_params)
-    @event.group = Group.find_by(name: event_params[:group])
+    @event.group_id = group.id
 
     if @event.save
       render json: @event, status: :created, location: @event

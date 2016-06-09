@@ -16,7 +16,7 @@ class Group < ApplicationRecord
   end
 
   def validate_members
-    if self.members.count == 0
+    if self.members.count < 2
       errors.add(:members, 'A group has to have members')
     end
   end

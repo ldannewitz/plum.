@@ -1,6 +1,3 @@
-# User.destory_all
-# Group.destory_all
-
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
@@ -20,25 +17,9 @@ cubs = Group.new(name: "Cubs", members: [rizzo, kris, addison, david, dexter])
 dbc = Group.new(name: "DBC", members: [brad, jon, tom, lisa])
 destinyschild = Group.new(name: "Destiny's Child", members: [liz, beyonce, charlotte])
 
-# m1 = Membership.find_or_create_by!(member_id: rizzo.id, group_id: cubs.id)
-# m2 = Membership.find_or_create_by!(member_id: kris.id, group_id: cubs.id)
-# m3 = Membership.find_or_create_by!(member_id: addison.id, group_id: cubs.id)
-# m4 = Membership.find_or_create_by!(member_id: david.id, group_id: cubs.id)
-# m5 = Membership.find_or_create_by!(member_id: dexter.id, group_id: cubs.id)
-#
-# m6 = Membership.create!(member_id: brad.id, group_id: dbc.id)
-# m7 = Membership.create!(member_id: jon.id, group_id: dbc.id)
-# m8 = Membership.create!(member_id: tom.id, group_id: dbc.id)
-# m9 = Membership.create!(member_id: lisa.id, group_id: dbc.id)
-#
-# m10 = Membership.create!(member_id: liz.id, group_id: destinyschild.id)
-# m11 = Membership.create!(member_id: beyonce.id, group_id: destinyschild.id)
-# m12 = Membership.create!(member_id: charlotte.id, group_id: destinyschild.id)
-# m13 = Membership.create!(member_id: brad.id, group_id: destinyschild.id)
 
-
-roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: cubs)
-rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 7, 10), settled?: false, group: dbc)
+roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 7), settled?: false, group: cubs)
+rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 8), settled?: false, group: dbc)
 tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 30), settled?: false, group: destinyschild)
 
 

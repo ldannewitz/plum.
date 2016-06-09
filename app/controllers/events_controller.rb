@@ -5,16 +5,16 @@ class EventsController < ApplicationController
   end
 
   def new_expense
-    group = Group.find_by(name: params[:group])
-    params[:group] = group
+    # group = Group.find_by(name: params[:group])
+    # params[:group] = group
 
-    @event = Event.new(event_params)
-    @event.group_id = group.id
+    @expense = Expense.new(expense_params)
+    # @expense.group_id = group.id
 
-    if @event.save
-      render json: @event, status: :created, location: @event
+    if @expense.save
+      render json: @expense, status: :created, location: @expense
     else
-      render json: @event.errors, status: :unprocessable_entity
+      render json: @expense.errors, status: :unprocessable_entity
     end
   end
 

@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
-    background-color: #EFEFEF;
+    /*background-color: #EFEFEF;*/
+    background-color: pink;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
@@ -51,16 +52,27 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  div.header{
+    width:100%;
+  }
+
+  div.image, img {
+    width:100%;
+  }
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/500.html -->
   <div class="dialog">
-    <div>
+    <div class="header">
       <h1>We're sorry, but something went wrong.</h1>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <!-- <p>If you are the application owner check the logs for more information.</p> -->
+    <div class="image">
+      <img src="https://httpstatusdogs.com/img/500.jpg"></img>
+    </div>
   </div>
 </body>
 </html>

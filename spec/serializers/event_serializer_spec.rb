@@ -21,10 +21,10 @@ describe EventSerializer do
 
   subject { serialize(object) }
 
-  it { should include(:name => "Hackaton") }
-  it { should include(:start_date => DateTime.new(2016, 6, 4)) }
-  it { should include(:end_date => DateTime.new(2016, 6, 6)) }
-  it { should include(:settled? => false) }
-  it { should include(:group_id => group.id) }
-  it { should include(:total => 10.00) }
+  # it { should include(:name => "Hackaton") }
+  # it { should include(:start_date => DateTime.new(2016, 6, 4)) }
+  # it { should include(:end_date => DateTime.new(2016, 6, 6)) }
+  # it { should include(:settled? => false) }
+  # it { should include(:group_id => group.id) }
+  # it { should include(:total => 10.00) }
 end

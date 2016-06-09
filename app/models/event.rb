@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   has_many :expenses, dependent: :destroy
   has_many :bills, dependent: :destroy
 
-  validates :name, :start_date, :end_date, :group_id, :total, presence: true
+  validates :name, :start_date, :end_date, :group, :total, presence: true
 
   # is the event over? If so, generate_invoices
   def expired?

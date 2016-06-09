@@ -5,7 +5,7 @@ class Group < ApplicationRecord
   has_many :expenses, through: :events
 
   validates :name, presence: true
-  # validate :validate_members
+  validate :validate_members
 
   def add_members(new_members, creator_id)
     add_creator = true

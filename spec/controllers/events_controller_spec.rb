@@ -2,19 +2,18 @@ require "rails_helper"
 
 RSpec.describe EventsController, :type => :controller do
 
-  # before(:each) do
-  #   silence_stream(STDOUT) do
-  #     yield
-  #   end
-  # end
-
   describe "GET #show" do
-    let(:cubs_infield) { Group.create!(name: "Cubs") }
-    let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs_infield) }
+
+    before(:each) do
+      @member = User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password')
+      @rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password")
+      @cubs_infield = Group.new(name: "Cubs", members: [@member, @rizzo])
+      @event = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: @cubs_infield)
+    end
 
     it "responds successfully with an HTTP 200 status code" do
       silence_stream(STDOUT) do
-        get :show, params: { id: event.id }
+        get :show, params: { id: @event.id }
         aggregate_failures "testing response" do
           expect(response).to be_success
           expect(response).to have_http_status(200)
@@ -24,8 +23,8 @@ RSpec.describe EventsController, :type => :controller do
 
     it "loads an event into @event" do
       silence_stream(STDOUT) do
-        get :show, params: { id: event.id }
-        expect(assigns(:event)).to match(event)
+        get :show, params: { id: @event.id }
+        expect(assigns(:event)).to match(@event)
       end
     end
   end

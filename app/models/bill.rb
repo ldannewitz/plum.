@@ -9,10 +9,10 @@ class Bill < ApplicationRecord
   belongs_to :event
   belongs_to :user
 
-  validates :event_id, :user_id, :bill_type, :amount, presence: true
+  validates :event, :user, :bill_type, :amount, presence: true
 
   def paypalurl
-    "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{self.paypal_id}"
+    "https://www.sandbox.paypal.com/us/cgi-bin/?cmd=_pay-inv&id=#{self.paypal_id}" if self.bill_type == 'debit'
   end
 
   def groupname

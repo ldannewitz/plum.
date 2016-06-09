@@ -2,9 +2,9 @@ require_relative '../rails_helper'
 
 RSpec.describe Event, type: :model do
 
-  let!(:member) { User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password') }
+  let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
-  let (:cubs_infield) { Group.create!(name: "Cubs", members: [member, rizzo]) }
+  let (:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
   let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: cubs_infield, total: 10.00) }
 
   it 'has a name' do
@@ -70,7 +70,7 @@ RSpec.describe Event, type: :model do
 
   describe '#get_member_balances' do
     it 'determines the balance of each group members' do
-      expect(event.get_member_balances).to include("e@mail.com"=>-5.0)
+      expect(event.get_member_balances).to include("drossgrandpa@gmail.com"=>-5.0)
     end
   end
 
@@ -103,8 +103,8 @@ RSpec.describe Event, type: :model do
     end
 
     it "returns false if all of event's invoices are not satisfied" do
-      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: member.id, description: "gas", amount: 27.34, location: "Chicago")
-      Bill.create!(event: event, user: member, bill_type: 'debit', amount: 4567.89, satisfied?: false)
+      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: david.id, description: "gas", amount: 27.34, location: "Chicago")
+      Bill.create!(event: event, user: david, bill_type: 'debit', amount: 4567.89, satisfied?: false)
       expect(event.all_bills_paid?).to eq(false)
     end
 
@@ -116,14 +116,14 @@ RSpec.describe Event, type: :model do
 
   describe '#settle_event' do
     it 'settles an event when all of its bills are satisfied' do
-      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: member.id, description: "gas", amount: 27.34, location: "Chicago")
-      Bill.create!(event: event, user: member, bill_type: 'debit', amount: 4567.89, satisfied?: true)
+      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: david.id, description: "gas", amount: 27.34, location: "Chicago")
+      Bill.create!(event: event, user: david, bill_type: 'debit', amount: 4567.89, satisfied?: true)
       expect{event.settle_event}.to change(event, :settled?)
     end
 
     it "returns 'not satisfied' when an event has unpaid bills" do
-      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: member.id, description: "gas", amount: 27.34, location: "Chicago")
-      Bill.create!(event: event, user: member, bill_type: 'debit', amount: 4567.89, satisfied?: false)
+      event.expenses << Expense.find_or_create_by!(event_id: event.id, spender_id: david.id, description: "gas", amount: 27.34, location: "Chicago")
+      Bill.create!(event: event, user: david, bill_type: 'debit', amount: 4567.89, satisfied?: false)
       expect(event.settle_event).to eq('not satisfied')
     end
   end

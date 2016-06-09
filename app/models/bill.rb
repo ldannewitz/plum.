@@ -24,7 +24,6 @@ class Bill < ApplicationRecord
   # end
 
   def get_invoice_details
-    p self
     if self.bill_type == 'debit'
 
       # Set up paypal client
@@ -85,6 +84,5 @@ class Bill < ApplicationRecord
   #     @get_transaction_details_response.Errors
   #   end
   # end
-
 
 end

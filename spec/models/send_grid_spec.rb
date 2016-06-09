@@ -1,9 +1,9 @@
 require_relative '../rails_helper'
 
 RSpec.describe SendGrid, type: :module do
-  let!(:member) { User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password') }
+  let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
-  let (:cubs_infield) { Group.create!(name: "Cubs", members: [member, rizzo]) }
+  let (:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
   let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: cubs_infield, total: 10.00) }
 
   describe '#send_email' do

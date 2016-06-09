@@ -1,11 +1,11 @@
 require_relative '../rails_helper'
 
 RSpec.describe Bill, type: :model do
-  let!(:member) { User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password') }
+  let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
-  let (:cubs_infield) { Group.create!(name: "Cubs", members: [member, rizzo]) }
+  let (:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
   let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: cubs_infield, total: 10.00) }
-  let(:bill) { Bill.create!(event: event, user: member, bill_type: 'debit', amount: -74.48, satisfied?: false) }
+  let(:bill) { Bill.create!(event: event, user: david, bill_type: 'debit', amount: -74.48, satisfied?: false) }
 
   it 'has an event id' do
     should { validate_presence_of(:event_id) }

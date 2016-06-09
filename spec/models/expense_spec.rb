@@ -3,14 +3,12 @@ require_relative '../rails_helper'
 RSpec.describe Expense, type: :model do
 
   let!(:member) { User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password') }
-
-  let!(:group) { Group.create!(name: 'RAR') }
-
-  let!(:membership) { Membership.create!(member: member, group: group) }
-
+  let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
+  let!(:group) {
+    group = Group.create!(name: 'RAR', members: [member, rizzo])
+  }
   let!(:event) { Event.create!(name: 'Saturday', start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), group: group, total: 10.00) }
-
-  let!(:expense) { Expense.new(event: event, spender_id: member.id, description: "TP", amount: 1.20) }
+  let!(:expense) { Expense.create!(event: event, spender_id: member.id, description: "TP", amount: 1.20) }
 
   it 'has an event id' do
     should { validate_presence_of(:event_id) }

@@ -8,16 +8,18 @@ class Group < ApplicationRecord
   # validate :validate_members
 
   def add_members(new_members, creator_id)
-    new_members << User.find(creator_id)
+    add_creator = true
     new_members.each do |member|
-      self.members << User.find_by(email: member[:email].downcase)
+       self.members << member
+       add_creator = false if member.id == creator_id
     end
+    self.members << User.find(creator_id) if add_creator
     self.save
   end
 
   def validate_members
-    if self.members.count < 2
-      errors.add(:members, 'A group has to have members')
+    if self.members.length < 2
+      errors.add(:members, 'A group needs two or more members')
     end
   end
 end

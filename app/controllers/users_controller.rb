@@ -43,7 +43,9 @@ class UsersController < ApplicationController
 
   # POST /users/:id/events
   def new_event
-    group = Group.find_by(name:params[:group])
+    group = Group.find_by(name: params[:group])
+    params[:group] = group
+
     @event = Event.new(event_params)
     @event.group_id = group.id
 

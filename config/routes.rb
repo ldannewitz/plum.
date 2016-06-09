@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/groups/:id/events' => 'groups#events', as: 'group_events'
 
   resources :events, only: [:show]
+  post '/events/:id/expenses' => 'events#new_expense', as: 'event_new_expense'
 
   resources :bills, except: [:update, :edit]
 

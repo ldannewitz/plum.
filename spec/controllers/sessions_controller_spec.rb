@@ -32,7 +32,7 @@ RSpec.describe SessionsController, :type => :controller do
     it "clears the user session" do
       silence_stream(STDOUT) do
         get :logout
-        expect(session[:user_id]).to be(nil)
+        expect(session[:user_id]).to be_nil
       end
     end
   end

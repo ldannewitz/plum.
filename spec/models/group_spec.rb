@@ -6,8 +6,6 @@ RSpec.describe Group, type: :model do
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
   let (:cubs_infield) { Group.create!(name: "Cubs", members: [member, rizzo]) }
 
-  # @event = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: @cubs_infield, total: 10.00)
-
   it 'has a name' do
     should { validate_presence_of(:name) }
   end
@@ -34,10 +32,11 @@ RSpec.describe Group, type: :model do
     end
   end
 
-  # describe '#validate_members' do
-  #   it 'makes sure a group has 2+ members' do
-  #     expect{cubs_infield.validate_members}.to change{cubs_infield.errors}.by(1)
-  #   end
-  # end
+  describe '#validate_members' do
+    let (:cubs) { Group.new(name: "Cubs", members: [rizzo]) }
+    it 'makes sure a group has 2+ members' do
+      expect{cubs.validate_members}.to change{cubs.errors.count}.by(1)
+    end
+  end
 
 end

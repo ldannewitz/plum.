@@ -11,7 +11,7 @@ RSpec.describe Expense, type: :model do
   let!(:expense) { Expense.create!(event: event, spender_id: member.id, description: "TP", amount: 1.20) }
 
   it 'has an event id' do
-    should { validate_presence_of(:event_id) }
+    should { validate_presence_of(:event) }
   end
 
   it 'has a spender id' do

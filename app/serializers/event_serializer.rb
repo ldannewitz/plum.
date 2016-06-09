@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_date, :end_date, :settled?, :group_id, :total #, :tentativebalance
+  attributes :id, :name, :start_date, :end_date, :settled?, :group_id, :groupname, :total #, :tentativebalance
 
   belongs_to :group
   has_many :members
@@ -46,6 +46,10 @@ class EventSerializer < ActiveModel::Serializer
       end
     end
     array
+  end
+
+  def groupname
+    object.group.name
   end
 
   # def tentativebalance

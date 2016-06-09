@@ -10,8 +10,9 @@ class Group < ApplicationRecord
   def add_members(new_members, creator_id)
     add_creator = true
     new_members.each do |member|
-       self.members << member
-       add_creator = false if member.id == creator_id
+      user = User.find_by(email: member['email'].downcase)
+      self.members << user
+      add_creator = false if user.id == creator_id
     end
     self.members << User.find(creator_id) if add_creator
     self.save

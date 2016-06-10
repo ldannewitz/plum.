@@ -19,14 +19,14 @@ RSpec.describe SessionsController, :type => :controller do
     end
 
     it "responds with an HTTP 422 status code upon unsuccesful login" do
-      # silence_stream(STDOUT) do
+      silence_stream(STDOUT) do
         LOGIN_JSON[:password] = 'fail'
         post :login, params: LOGIN_JSON
         aggregate_failures "testing response" do
           expect(response).not_to be_success
           expect(response).to have_http_status(422)
         end
-      # end
+      end
     end
   end
 

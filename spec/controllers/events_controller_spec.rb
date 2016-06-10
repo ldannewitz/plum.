@@ -48,10 +48,10 @@ RSpec.describe EventsController, :type => :controller do
     # end
 
     it 'returns an error for invalid params' do
-      # silence_stream(STDOUT) do
+      silence_stream(STDOUT) do
         post :new_expense, params: {"location"=>"Des Moines", "amount"=>"50", "event_id"=>"4", "spender_id"=>"1", "id"=>"1", "event"=>{}}
         expect(response).to have_http_status(422)
-      # end
+      end
     end
   end
 end

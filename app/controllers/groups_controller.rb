@@ -1,12 +1,10 @@
 class GroupsController < ApplicationController
 
   def create
-    p params
     @user = User.find(params[:user_id])
     params[:user_id] = @user.id
     @group = Group.new(group_params)
     @group.add_members(params[:members], @user.id)
-    # @group = @user.groups.new(name: group_params[:name])
     if @group.save
       render json: @group, status: :created, location: @group
     else

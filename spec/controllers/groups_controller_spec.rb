@@ -15,11 +15,9 @@ RSpec.describe GroupsController, :type => :controller do
   #
   #   it "responds successfully with an HTTP 204 status code" do
   #     # silence_stream(STDOUT) do
-  #       puts jon.id
   #       NEW_GROUP_JSON[:user_id] = jon.id
   #       post :create, params: NEW_GROUP_JSON
   #       aggregate_failures "testing response" do
-  #         puts response
   #         expect(response).to be_success
   #         expect(response).to have_http_status(204)
   #       end

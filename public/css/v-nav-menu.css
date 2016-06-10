@@ -1,0 +1,34 @@
+/* Header */
+header {
+    clear: both;
+    background: #FFF;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    box-shadow:  0 1px 4px rgba(0, 0, 0, 0.10);
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+body {
+    background: url(../img/landing2.jpg) no-repeat 50% 50% fixed;
+}
+
+.v-header-shadow {
+    background: url(../img/base/shadow-top.png) no-repeat;
+    position: absolute;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+    left: 0;
+    right: 0;
+    height: 40px;
+    width: 80%;
+    bottom: -40px;
+    margin-left: auto;
+    opacity: 0.6;
+    margin-right: auto;
+}

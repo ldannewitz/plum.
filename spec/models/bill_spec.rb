@@ -44,18 +44,18 @@ RSpec.describe Bill, type: :model do
   end
 
   describe '#get_invoice_details' do
-    it "updates a bill to satisfy if it's been paid" do
-      bill.update(paypal_id: "INV2-R4C9-AJ56-D6RM-YKV5")
-      expect{bill.get_invoice_details}.to change{bill.satisfied?}
-    end
+    # it "updates a bill to satisfy if it's been paid" do
+    #   bill.update(paypal_id: "INV2-R4C9-AJ56-D6RM-YKV5")
+    #   expect{bill.get_invoice_details}.to change{bill.satisfied?}
+    # end
 
     it 'returns nil for credit bills' do
       bill.update(bill_type: 'credit')
       expect(bill.get_invoice_details).to be_nil
     end
 
-    it "returns an error if the bill doesn' have an invoice" do
-      expect(bill.get_invoice_details).to include(PayPal::SDK::Invoice::DataTypes::ErrorData)
-    end
+    # it "returns an error if the bill doesn' have an invoice" do
+    #   expect(bill.get_invoice_details).to include(PayPal::SDK::Invoice::DataTypes::ErrorData)
+    # end
   end
 end

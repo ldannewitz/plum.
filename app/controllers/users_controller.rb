@@ -74,11 +74,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    JSON.parse(request.body.read)
-  #   # ActiveModelSerializers::Deserialization.jsonapi_parse(params[:user], only: [:first_name, :last_name, :email, :password, :phone])
-  #   # p params.fetch(:user, {}).permit(:first_name, :last_name, :name, :email, :password, :phone)
-  #   params.require(:user).permit(:first_name, :last_name, :name, :email, :password, :phone)
-  #   # params.require(:user).print(:first_name, :last_name, :name, :email, :password, :phone)
+    params.permit(:first_name, :last_name, :email, :password)
+
   end
 
   def event_params

@@ -1,6 +1,3 @@
-# User.destory_all
-# Group.destory_all
-
 rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
@@ -16,30 +13,14 @@ liz = User.create!(first_name: "Liz", last_name: "Alexander", email: "liz@gmail.
 beyonce = User.create!(first_name: "Beyonce", last_name: "Carter", email: "beyonce@gmail.com", password: "password", phone: "0000000002")
 charlotte = User.create!(first_name: "Charlotte", last_name: "Smith", email: "charlotte@gmail.com", password: "password", phone: "0000000003")
 
-cubs = Group.find_or_create_by!(name: "Cubs")
-dbc = Group.find_or_create_by!(name: "DBC")
-destinyschild = Group.find_or_create_by!(name: "Destiny's Child")
-
-m1 = Membership.find_or_create_by!(member_id: rizzo.id, group_id: cubs.id)
-m2 = Membership.find_or_create_by!(member_id: kris.id, group_id: cubs.id)
-m3 = Membership.find_or_create_by!(member_id: addison.id, group_id: cubs.id)
-m4 = Membership.find_or_create_by!(member_id: david.id, group_id: cubs.id)
-m5 = Membership.find_or_create_by!(member_id: dexter.id, group_id: cubs.id)
-
-m6 = Membership.create!(member_id: brad.id, group_id: dbc.id)
-m7 = Membership.create!(member_id: jon.id, group_id: dbc.id)
-m8 = Membership.create!(member_id: tom.id, group_id: dbc.id)
-m9 = Membership.create!(member_id: lisa.id, group_id: dbc.id)
-
-m10 = Membership.create!(member_id: liz.id, group_id: destinyschild.id)
-m11 = Membership.create!(member_id: beyonce.id, group_id: destinyschild.id)
-m12 = Membership.create!(member_id: charlotte.id, group_id: destinyschild.id)
-m13 = Membership.create!(member_id: brad.id, group_id: destinyschild.id)
+cubs = Group.new(name: "Cubs", members: [rizzo, kris, addison, david, dexter])
+dbc = Group.new(name: "DBC", members: [brad, jon, tom, lisa])
+destinyschild = Group.new(name: "Destiny's Child", members: [liz, beyonce, charlotte])
 
 
-roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs)
-rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 10), settled?: false, group: dbc)
-tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
+roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 7), settled?: false, group: cubs)
+rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 8), settled?: false, group: dbc)
+tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 30), settled?: false, group: destinyschild)
 
 
 x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Gas", amount: 27.34, location: "Chicago")
@@ -67,4 +48,3 @@ x20 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Food"
 x21 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Drinks", amount: 175.06, location: "Los Angeles")
 x22 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Diesel", amount: 177.65, location: "Denver")
 x23 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Food", amount: 33.65, location: "Des Moines")
-

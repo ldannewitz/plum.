@@ -14,7 +14,7 @@ class InvoiceApi
       :signature => ENV['SIGNATURE'])
   end
 
-  def build_create_and_send_invoice(email, event_name, unit_price)
+  def create_invoice(email, event_name, unit_price)
     @api.build_create_and_send_invoice({
       :invoice => {
         :merchantEmail => ENV['MERCHANT_EMAIL'],
@@ -29,7 +29,7 @@ class InvoiceApi
         :paymentTerms => "DueOnReceipt" } })
   end
 
-  def create_and_send_invoice(invoice)
+  def send_invoice(invoice)
     @api.create_and_send_invoice(invoice)
   end
 end

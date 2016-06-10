@@ -69,19 +69,19 @@ class Event < ApplicationRecord
           invoice_api = InvoiceApi.new
 
           # Build request object
-          invoice = invoice_api.build_create_and_send_invoice(email, event_name, unit_price)
+          invoice = invoice_api.create_invoice(email, event_name, unit_price)
 
           # Make API call & get response
-          invoice_response = invoice_api.create_and_send_invoice(invoice)
+          invoice_response = invoice_api.send_invoice(invoice)
 
           # Access Response
           if invoice_response.success?
             @new_bill.update_attribute(:paypal_id, invoice_response.invoiceID)
             @new_bill.save
             send_email(@new_bill.paypal_id, email)
-            p "yes"
-
-            p invoice_response
+            # p "yes"
+            # 
+            # p invoice_response
             # invoice_response.invoiceID
             # invoice_response.invoiceNumber
             # invoice_response.invoiceURL

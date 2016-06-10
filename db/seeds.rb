@@ -20,11 +20,11 @@ kevin = User.create!(first_name: "kevin", last_name: "Fowle", email: "kevin@gmai
 beyonce = User.create!(first_name: "Beyonce", last_name: "Carter", email: "beyonce@gmail.com", password: "password", phone: "0000000002")
 charlotte = User.create!(first_name: "Charlotte", last_name: "Smith", email: "charlotte@gmail.com", password: "password", phone: "0000000003")
 
-cubs = Group.find_or_create_by!(name: "Cubs", members: [anthony, kris, addison, david, dexter])
-dbc = Group.find_or_create_by!(name: "DBC", members: [brad, jon, tom, lisa])
-bryzzo = Group.find_or_create_by!(name: "Bryzzo", members: [anthony, kris])
-destinyschild = Group.find_or_create_by!(name: "Destiny's Child", members: [liz, beyonce, charlotte])
-roommates = Group.find_or_create_by!(name: "Roommates", members: [anthony, fronk, kris])
+cubs = Group.create!(name: "Cubs", members: [anthony, kris, addison, david, dexter])
+dbc = Group.create!(name: "DBC", members: [brad, jon, tom, lisa])
+bryzzo = Group.create!(name: "Bryzzo", members: [anthony, kris])
+destinyschild = Group.create!(name: "Destiny's Child", members: [liz, beyonce, charlotte])
+roommates = Group.create!(name: "Roommates", members: [anthony, fronk, kris])
 
 # m1 = Membership.find_or_create_by!(member_id: rizzo.id, group_id: cubs.id)
 # m2 = Membership.find_or_create_by!(member_id: kris.id, group_id: cubs.id)
@@ -86,4 +86,3 @@ x23 = Expense.create!(event_id: roomates.id, spender_id: fronk.id, description: 
 x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Laundry Detergent", amount: 16.65, location: "Chicago")
 x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Toilet Paper", amount: 8.14, location: "Chicago")
 x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Dinner", amount: 42.10, location: "Chicago")
-

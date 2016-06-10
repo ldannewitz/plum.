@@ -87,7 +87,7 @@ class Event < ApplicationRecord
               :itemList => {
                   :item => [{ "name": event_name,
                               "quantity": "1",
-                              "unitPrice": unit_price
+                              "unitPrice": @new_bill.amount * (-1)
                             }]
                             },
               :currencyCode => "USD",

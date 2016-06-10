@@ -47,11 +47,12 @@ roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4),
 rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 10), settled?: false, group: dbc)
 tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
 museum = Event.create!(name: "Museum", start_date: DateTime.new(2016, 5, 28), end_date: DateTime.new(2016, 5, 28), settled?: false, group: bryzzo)
+may_payments = Event.create!(name: "May Payments", start_date: DateTime.new(2016, 5, 1), end_date: DateTime.new(2016, 5, 31), settled?: false, group: bryzzo)
 
 
-x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Gas", amount: 27.34, location: "Chicago")
-x2 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Dinner", amount: 58.21, location: "Des Moines")
-x3 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Hotel", amount: 117.86, location: "Omaha")
+x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Gas", amount: 27.34, location: "Chicago")
+x2 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Dinner", amount: 58.21, location: "Des Moines")
+x3 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Hotel", amount: 117.86, location: "Omaha")
 x4 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "Gas", amount: 96.53, location: "Des Moines")
 x5 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "Food", amount: 60.34, location: "Davenport")
 x6 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: addison.id, description: "Snacks", amount: 5.21, location: "DeKalb")
@@ -80,9 +81,9 @@ x23 = Expense.create!(event_id: museum.id, spender_id: kris.id, description: "Fo
 x23 = Expense.create!(event_id: museum.id, spender_id: anthony.id, description: "Souvenirs", amount: 12.65, location: "Chicago")
 
 
-x23 = Expense.create!(event_id: roomates.id, spender_id: anthony.id, description: "Dish Soap", amount: 3.60, location: "Chicago")
-x23 = Expense.create!(event_id: roomates.id, spender_id: anthony.id, description: "Milk", amount: 2.88, location: "Chicago")
-x23 = Expense.create!(event_id: roomates.id, spender_id: fronk.id, description: "Rent", amount: 1200.00, location: "Chicago")
-x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Laundry Detergent", amount: 16.65, location: "Chicago")
-x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Toilet Paper", amount: 8.14, location: "Chicago")
-x23 = Expense.create!(event_id: roomates.id, spender_id: kris.id, description: "Dinner", amount: 42.10, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Dish Soap", amount: 3.60, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Milk", amount: 2.88, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: fronk.id, description: "Rent", amount: 1200.00, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Laundry Detergent", amount: 16.65, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Toilet Paper", amount: 8.14, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Dinner", amount: 42.10, location: "Chicago")

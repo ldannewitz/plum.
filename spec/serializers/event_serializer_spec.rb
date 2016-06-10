@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 describe EventSerializer do
-  let(:group) { Group.find_or_create_by!(name: "DBC") }
-  let (:member) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111") }
-  let(:event) { Event.create!(name: "Hackaton", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), group: group) }
+  let!(:brad) { User.create!(first_name: "Brad", last_name: "Lindgren", email: "brad@gmail.com", password: "password") }
+  let!(:lisa) { User.create!(first_name: "Lisa", last_name: "Dannewitz", email: "lisa@gmail.com", password: "password") }
+  let!(:dbc) { Group.create!(name: "DBC", members: [ brad, lisa ]) }
+  let(:event) { Event.create!(name: "Hackaton", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), group: dbc) }
+  let!(:food) { Expense.create!(event: event, spender_id: lisa.id, description: "food", amount: 60.34, location: "Davenport") }
+  let!(:snacks) { Expense.create!(event: event, spender_id: lisa.id, description: "snacks", amount: 5.21, location: "DeKalb") }
 
   let(:object) do
     build_serializable(
@@ -11,20 +14,19 @@ describe EventSerializer do
       start_date: DateTime.new(2016, 6, 4),
       end_date: DateTime.new(2016, 6, 6),
       settled?: false,
-      group_id: group.id,
+      group: dbc,
       total: 10.00,
-      members: [member],
-      expenses: [Expense.find_or_create_by!(event: event, spender_id: member.id, description: "food", amount: 60.34, location: "Davenport"),
-      Expense.find_or_create_by!(event: event, spender_id: member.id, description: "snacks", amount: 5.21, location: "DeKalb")],
+      members: [ brad, lisa ],
+      expenses: [ food, snacks ]
     )
   end
 
   subject { serialize(object) }
 
-  # it { should include(:name => "Hackaton") }
-  # it { should include(:start_date => DateTime.new(2016, 6, 4)) }
-  # it { should include(:end_date => DateTime.new(2016, 6, 6)) }
-  # it { should include(:settled? => false) }
-  # it { should include(:group_id => group.id) }
-  # it { should include(:total => 10.00) }
+  it { should include(:name => "Hackaton") }
+  it { should include(:start_date => DateTime.new(2016, 6, 4)) }
+  it { should include(:end_date => DateTime.new(2016, 6, 6)) }
+  it { should include(:settled? => false) }
+  it { should include(:group => {"id" => dbc.id, "name" => "DBC"}) }
+  it { should include(:total => 10.00) }
 end

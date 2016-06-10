@@ -80,7 +80,7 @@ class Event < ApplicationRecord
             @new_bill.save
             send_email(@new_bill.paypal_id, email)
             # p "yes"
-            # 
+            #
             # p invoice_response
             # invoice_response.invoiceID
             # invoice_response.invoiceNumber
@@ -90,7 +90,7 @@ class Event < ApplicationRecord
             invoice_response.error
           end # close response loop
         end # close API call
-      end # close IF loop
+      end # close duplicate invoice loop
     end # close create bill loop
   end # close generate_invoices method
 

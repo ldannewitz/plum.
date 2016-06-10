@@ -10,3 +10,5 @@ before_script:
  - bundle exec rake db:migrate
  - bundle exec rake db:migrate RAILS_ENV=test
 bundler_args: --binstubs=./bundler_stubs
+notifications:
+  email: false

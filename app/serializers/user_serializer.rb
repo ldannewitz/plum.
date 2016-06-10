@@ -10,7 +10,6 @@ class UserSerializer < ActiveModel::Serializer
     array = []
     object.groups.each do |group|
       info = []
-      # info << {"id": group.id}
       info << {"id": group.id}
       info << {"name": group.name}
       array << info

@@ -28,4 +28,30 @@ RSpec.describe EventsController, :type => :controller do
       end
     end
   end
+
+  describe "POST #new_expense" do
+
+    # it "responds successfully with an HTTP 201 status code" do
+    #   # silence_stream(STDOUT) do
+    #     post :new_expense, params: NEW_EXPENSE_JSON
+    #     aggregate_failures "testing response" do
+    #       assert_response :success
+    #       expect(response).to have_http_status(201)
+    #     end
+    #   # end
+    # end
+    #
+    # it "creates a new user" do
+    #   # silence_stream(STDOUT) do
+    #     expect { post :new_expense, params: NEW_EXPENSE_JSON }.to change { Expense.all.count }.by(1)
+    #   # end
+    # end
+
+    it 'returns an error for invalid params' do
+      silence_stream(STDOUT) do
+        post :new_expense, params: {"location"=>"Des Moines", "amount"=>"50", "event_id"=>"4", "spender_id"=>"1", "id"=>"1", "event"=>{}}
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
 end

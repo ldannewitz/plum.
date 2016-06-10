@@ -6,7 +6,8 @@ describe EventSerializer do
   let!(:dbc) { Group.create!(name: "DBC", members: [ brad, lisa ]) }
   let(:event) { Event.create!(name: "Hackaton", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), group: dbc) }
   let!(:food) { Expense.create!(event: event, spender_id: lisa.id, description: "food", amount: 60.34, location: "Davenport") }
-  let!(:snacks) { Expense.create!(event: event, spender_id: lisa.id, description: "snacks", amount: 5.21, location: "DeKalb") }
+  let!(:snacks) { Expense.create!(event: event, spender_id: lisa.id, description: "snacks", amount: 5.22, location: "DeKalb") }
+  let!(:bill) { Bill.create!(event: event, user: brad, bill_type: 'debit', amount: 32.78) }
 
   let(:object) do
     build_serializable(
@@ -17,7 +18,8 @@ describe EventSerializer do
       group: dbc,
       total: 10.00,
       members: [ brad, lisa ],
-      expenses: [ food, snacks ]
+      expenses: [ food, snacks ],
+      bills: [bill]
     )
   end
 

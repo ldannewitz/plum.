@@ -81,7 +81,7 @@ x23 = Expense.create!(event_id: museum.id, spender_id: kris.id, description: "Fo
 x23 = Expense.create!(event_id: museum.id, spender_id: anthony.id, description: "Souvenirs", amount: 12.65, location: "Chicago")
 
 
-x23 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Dish Soap", amount: 3.62, location: "Chicago")
+x23 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Dish Soap", amount: 3.66, location: "Chicago")
 x23 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Milk", amount: 2.88, location: "Chicago")
 x23 = Expense.create!(event_id: may_payments.id, spender_id: fronk.id, description: "Rent", amount: 1200.00, location: "Chicago")
 x23 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Laundry Detergent", amount: 16.65, location: "Chicago")

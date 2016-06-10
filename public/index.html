@@ -1,29 +1,129 @@
-<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'></link>
-<style>
-  body {
-    background-image: url(landing.jpg);
-    /*max-width: 100vw;*/
-    /*height: 100%;*/
-    /*max-height: 100vw;*/
-    background-size: cover;
-  }
+﻿<!DOCTYPE html>
 
-  h1 {
-    color: plum;
-    font-size: 3em;
-    font-family: 'Lobster';
-    margin-left: 12px;
-  }
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>plum payments</title>
+    <meta name="keywords" content="plum payments" />
+    <meta name="description" content="plum payments - we make payments simple and easy">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  a {
-    color: whitesmoke;
-  }
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,700,800,900" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
-  a:visited {
-    color: gray;
-  }
-</style>
+    <!-- Libs CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/v-nav-menu.css" rel="stylesheet" />
+    <link href="css/v-animation.css" rel="stylesheet" />
+    <link href="css/v-bg-stylish.css" rel="stylesheet" />
+    <link href="css/v-shortcodes.css" rel="stylesheet" />
+    <link href="css/theme-responsive.css" rel="stylesheet" />
+    <link href="plugins/owl-carousel/owl.theme.css" rel="stylesheet" />
+    <link href="plugins/owl-carousel/owl.carousel.css" rel="stylesheet" />
 
-<h1>plum.</h1>
+    <!-- Current Page CSS -->
+    <link href="plugins/rs-plugin/css/settings.css" rel="stylesheet" />
+    <link href="plugins/rs-plugin/css/custom-captions.css" rel="stylesheet" />
 
-<a href="https://github.com/ldannewitz/plum.">Github Repo</a>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="no-page-top">
+    <div id="container">
+        <!--Set your own slider options. Look at the v_RevolutionSlider() function in 'theme-core.js' file to see options-->
+        <div class="home-slider-wrap fullwidthbanner-container" id="home">
+            <div class="v-rev-slider" data-slider-options='{ "startheight": 700 }'>
+                <ul>
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="600">
+                      <!--   <img src="img/landing2.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> -->
+                        <div id="plum-logo" class="tp-caption v-caption-big-white sfl stl" data-x="450" data-y="245" data-speed="600" data-start="600" data-easing="Power1.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0" data-endspeed="300">
+                            plum
+                        </div>
+                        <div id="plum-subtitle" class="tp-caption v-caption-h1 sfl stl"
+                            data-x="450"
+                            data-y="360"
+                            data-speed="700"
+                            data-start="1200"
+                            data-easing="Power1.easeInOut"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0"
+                            data-endelementdelay="0"
+                            data-endspeed="300">
+                            <!-- we make payments simple and easy -->
+                            safe, easy, stress free payments
+                        </div>
+                        <div class="tp-caption sfl stl"
+                            data-x="450"
+                            data-y="450"
+                            data-speed="600"
+                            data-start="1800"
+                            data-easing="Power1.easeInOut"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0"
+                            data-endelementdelay="0"
+                            data-endspeed="300">
+                            <a href='https://github.com/ldannewitz/plum.' class="btn v-btn v-second-light">Rails GitHub</a>
+                        </div>
+
+                        <div class="tp-caption sfl stl"
+                            data-x="605"
+                            data-y="450"
+                            data-speed="600"
+                            data-start="2200"
+                            data-easing="Power1.easeInOut"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0"
+                            data-endelementdelay="0"
+                            data-endspeed="300">
+                            <a href='https://github.com/jbkaplan/plum-app' class="btn v-btn v-second-light">React Native GitHub</a>
+                        </div>
+                        <div class="tp-caption sfl stl"
+                            data-x="110"
+                            data-y="130"
+                            data-speed="600"
+                            data-start="1800"
+                            data-easing="Power1.easeInOut"
+                            data-splitin="none"
+                            data-splitout="none"
+                            data-elementdelay="0"
+                            data-endelementdelay="0"
+                            data-endspeed="300">
+                            <img src="img/iphone2.png" />
+                        </div>
+                        <!--<div class="v-slider-overlay overlay-colored"></div>-->
+                    </li>
+                </ul>
+            </div>
+
+            <div class="shadow-right"></div>
+        </div>
+
+    <!--// BACK TO TOP //-->
+    <div id="back-to-top" class="animate-top"><i class="fa fa-angle-up"></i></div>
+
+    <!-- Libs -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/jquery.easing.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
+    <script src="js/jquery.carouFredSel.min.js"></script>
+    <script src="js/theme-plugins.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/imagesloaded.js"></script>
+    <script src="js/view.min.js?auto"></script>
+    <script src="plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/theme-core.js"></script>
+</body>
+</html>

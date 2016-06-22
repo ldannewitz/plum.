@@ -49,6 +49,7 @@ RSpec.describe Event, type: :model do
 
   describe '#expired?' do
     it 'returns false when the event is live' do
+      event.update(end_date: (Time.now + 1000000))
       expect(event.expired?).to be(false)
     end
 

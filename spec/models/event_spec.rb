@@ -5,7 +5,7 @@ RSpec.describe Event, type: :model do
   let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
   let (:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
-  let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: cubs_infield, total: 10.00) }
+  let(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: (Time.now + 1000000), settled?: false, group: cubs_infield, total: 10.00) }
 
   it 'has a name' do
     should { validate_presence_of(:name) }
@@ -49,7 +49,6 @@ RSpec.describe Event, type: :model do
 
   describe '#expired?' do
     it 'returns false when the event is live' do
-      event.update(end_date: (Time.now + 1000000))
       expect(event.expired?).to be(false)
     end
 

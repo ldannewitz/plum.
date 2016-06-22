@@ -2,7 +2,10 @@ require "rails_helper"
 
 RSpec.describe SessionsController, :type => :controller do
   describe "POST #login" do
+    let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
     let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111") }
+    let!(:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
+    let!(:event) { Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: (Time.now + 1000000), settled?: false, group: cubs_infield, total: 10.00) }
 
     it "responds with an HTTP 201 status code upon succesful login" do
       silence_stream(STDOUT) do
@@ -15,7 +18,9 @@ RSpec.describe SessionsController, :type => :controller do
     end
 
     it "creates a new session" do
-      expect {post :login, params: LOGIN_JSON}.to change {session[:user_id]}
+      silence_stream(STDOUT) do
+        expect {post :login, params: LOGIN_JSON}.to change {session[:user_id]}
+      end
     end
 
     it "responds with an HTTP 422 status code upon unsuccesful login" do

@@ -1,4 +1,4 @@
-rizzo = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
+anthony = User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password", phone: "1111111111")
 kris = User.create!(first_name: "Kris", last_name: "Bryant", email: "krisb6579@gmail.com", password: "password", phone: "2222222222")
 addison = User.create!(first_name: "Addison", last_name: "Russell", email: "arussell@gmail.com", password: "password", phone: "3333333333")
 david = User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password", phone: "4444444444")
@@ -8,24 +8,31 @@ brad = User.create!(first_name: "Brad", last_name: "Lindgren", email: "brad@gmai
 jon = User.create!(first_name: "Jon", last_name: "Kaplan", email: "jon@gmail.com", password: "password", phone: "7777777777")
 tom = User.create!(first_name: "Tom", last_name: "Sok", email: "tom@gmail.com", password: "password", phone: "8888888888")
 lisa = User.create!(first_name: "Lisa", last_name: "Dannewitz", email: "lisa@gmail.com", password: "password", phone: "9999999999")
-
 liz = User.create!(first_name: "Liz", last_name: "Alexander", email: "liz@gmail.com", password: "password", phone: "0000000001")
+allison = User.create!(first_name: "Allison", last_name: "Paul", email: "allison@gmail.com", password: "password", phone: "9999999999")
+fronk = User.create!(first_name: "Fronk", last_name: "Lam", email: "fronk@gmail.com", password: "password", phone: "9999999999")
+jack = User.create!(first_name: "Jack", last_name: "Thatcher", email: "jack@gmail.com", password: "password", phone: "9999999999")
+alex = User.create!(first_name: "Alex", last_name: "Wen", email: "alex@gmail.com", password: "password", phone: "9999999999")
+kevin = User.create!(first_name: "kevin", last_name: "Fowle", email: "kevin@gmail.com", password: "password", phone: "9999999999")
 beyonce = User.create!(first_name: "Beyonce", last_name: "Carter", email: "beyonce@gmail.com", password: "password", phone: "0000000002")
 charlotte = User.create!(first_name: "Charlotte", last_name: "Smith", email: "charlotte@gmail.com", password: "password", phone: "0000000003")
 
-cubs = Group.new(name: "Cubs", members: [rizzo, kris, addison, david, dexter])
-dbc = Group.new(name: "DBC", members: [brad, jon, tom, lisa])
-destinyschild = Group.new(name: "Destiny's Child", members: [liz, beyonce, charlotte])
+
+cubs = Group.create!(name: "Cubs", members: [anthony, kris, addison, david, dexter])
+dbc = Group.create!(name: "DBC", members: [brad, jon, tom, lisa])
+bryzzo = Group.create!(name: "Bryzzo", members: [anthony, kris])
+destinyschild = Group.create!(name: "Destiny's Child", members: [liz, beyonce, charlotte])
+roommates = Group.create!(name: "Roommates", members: [anthony, fronk, kris])
+roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 6), settled?: false, group: cubs)
+rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 10), settled?: false, group: dbc)
+tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 7), settled?: false, group: destinyschild)
+museum = Event.create!(name: "Museum", start_date: DateTime.new(2016, 5, 28), end_date: DateTime.new(2016, 5, 28), settled?: false, group: bryzzo)
+may_payments = Event.create!(name: "May Payments", start_date: DateTime.new(2016, 5, 1), end_date: DateTime.new(2016, 5, 31), settled?: false, group: bryzzo)
 
 
-roadtrip = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 7), settled?: false, group: cubs)
-rafting = Event.create!(name: "Rafting", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 8), settled?: false, group: dbc)
-tour = Event.create!(name: "Wine Tour", start_date: DateTime.new(2016, 6, 2), end_date: DateTime.new(2016, 6, 30), settled?: false, group: destinyschild)
-
-
-x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Gas", amount: 27.34, location: "Chicago")
-x2 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Dinner", amount: 58.21, location: "Des Moines")
-x3 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: rizzo.id, description: "Hotel", amount: 117.86, location: "Omaha")
+x1 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Gas", amount: 27.34, location: "Chicago")
+x2 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Dinner", amount: 58.21, location: "Des Moines")
+x3 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: anthony.id, description: "Hotel", amount: 117.86, location: "Omaha")
 x4 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "Gas", amount: 96.53, location: "Des Moines")
 x5 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: kris.id, description: "Food", amount: 60.34, location: "Davenport")
 x6 = Expense.find_or_create_by!(event_id: roadtrip.id, spender_id: addison.id, description: "Snacks", amount: 5.21, location: "DeKalb")
@@ -48,3 +55,15 @@ x20 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Food"
 x21 = Expense.create!(event_id: tour.id, spender_id: liz.id, description: "Drinks", amount: 175.06, location: "Los Angeles")
 x22 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Diesel", amount: 177.65, location: "Denver")
 x23 = Expense.create!(event_id: tour.id, spender_id: beyonce.id, description: "Food", amount: 33.65, location: "Des Moines")
+
+x24 = Expense.create!(event_id: museum.id, spender_id: kris.id, description: "Tickets", amount: 44.00, location: "Chicago")
+x25 = Expense.create!(event_id: museum.id, spender_id: kris.id, description: "Food", amount: 21.34, location: "Chicago")
+x26 = Expense.create!(event_id: museum.id, spender_id: anthony.id, description: "Souvenirs", amount: 12.65, location: "Chicago")
+
+
+x27 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Dish Soap", amount: 3.66, location: "Chicago")
+x28 = Expense.create!(event_id: may_payments.id, spender_id: anthony.id, description: "Milk", amount: 2.88, location: "Chicago")
+x29 = Expense.create!(event_id: may_payments.id, spender_id: fronk.id, description: "Rent", amount: 1200.00, location: "Chicago")
+x30 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Laundry Detergent", amount: 16.65, location: "Chicago")
+x31 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Toilet Paper", amount: 8.14, location: "Chicago")
+x32 = Expense.create!(event_id: may_payments.id, spender_id: kris.id, description: "Dinner", amount: 42.10, location: "Chicago")

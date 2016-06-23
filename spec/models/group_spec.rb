@@ -2,11 +2,9 @@ require_relative '../rails_helper'
 
 RSpec.describe Group, type: :model do
 
-  let!(:member) { User.create!(first_name: 'First', last_name: 'Last', email: 'e@mail.com', password: 'password') }
+  let!(:david) { User.create!(first_name: "David", last_name: "Ross", email: "drossgrandpa@gmail.com", password: "password") }
   let!(:rizzo) { User.create!(first_name: "Anthony", last_name: "Rizzo", email: "arizzo@gmail.com", password: "password") }
-  let (:cubs_infield) { Group.create!(name: "Cubs", members: [member, rizzo]) }
-
-  # @event = Event.create!(name: "Roadtrip", start_date: DateTime.new(2016, 6, 4), end_date: DateTime.new(2016, 6, 20), settled?: false, group: @cubs_infield, total: 10.00)
+  let (:cubs_infield) { Group.create!(name: "Cubs", members: [david, rizzo]) }
 
   it 'has a name' do
     should { validate_presence_of(:name) }
@@ -30,14 +28,15 @@ RSpec.describe Group, type: :model do
 
   describe '#add_members' do
     it 'adds the group creator and members' do
-      expect{cubs_infield.add_members([rizzo],member.id)}.to change {cubs_infield.members.count}.by(2)
+      expect{cubs_infield.add_members([rizzo],david.id)}.to change {cubs_infield.members.count}.by(2)
     end
   end
 
-  # describe '#validate_members' do
-  #   it 'makes sure a group has 2+ members' do
-  #     expect{cubs_infield.validate_members}.to change{cubs_infield.errors}.by(1)
-  #   end
-  # end
+  describe '#validate_members' do
+    let (:cubs) { Group.new(name: "Cubs", members: [rizzo]) }
+    it 'makes sure a group has 2+ members' do
+      expect{cubs.validate_members}.to change{cubs.errors.count}.by(1)
+    end
+  end
 
 end

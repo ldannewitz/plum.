@@ -12,7 +12,8 @@ SimpleCov.start do
   coverage_dir 'coverage'
   add_filter "/app/controllers/application_controller.rb"
   add_filter "/app/channels"
-  # add_filter "/app/jobs"
+  add_filter "/app/apis"
+  add_filter "/app/jobs"
   add_filter "/app/mailers"
   add_group "Models", "app/models"
   add_group "Controllers", "app/controllers"

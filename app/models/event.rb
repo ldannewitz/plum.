@@ -1,9 +1,5 @@
-require 'paypal-sdk-rest'
-require 'paypal-sdk-invoice'
-include PayPal::SDK::REST
-include PayPal::SDK::Core::Logging
-require 'sendgrid-ruby'
-require 'send_grid.rb'
+require './app/apis/send_grid.rb'
+require './app/apis/invoice_api.rb'
 
 class Event < ApplicationRecord
   include SendGrid
@@ -25,7 +21,7 @@ class Event < ApplicationRecord
 
   # find how much each member would pay in an even split
   def even_split
-    self.total / self.members.count.to_f
+    total / members.count.to_f
   end
 
   # find how much each group member owes/will be credited & add it to bills_hash
@@ -70,49 +66,31 @@ class Event < ApplicationRecord
           event_name = self.name
           email = @user.email
           unit_price = (@new_bill.amount * (-1))
-
-          # Set up PayPal client
-          @api = PayPal::SDK::Invoice::API.new(
-            :mode      => "sandbox",
-            :app_id    => ENV['APP_ID'],
-            :username  => ENV['USERNAME'],
-            :password  => ENV['PASSWORD'],
-            :signature => ENV['SIGNATURE'])
+          invoice_api = InvoiceApi.new
 
           # Build request object
-          @create_and_send_invoice = @api.build_create_and_send_invoice({
-            :invoice => {
-              :merchantEmail => ENV['MERCHANT_EMAIL'],
-              :payerEmail => email,
-              :itemList => {
-                  :item => [{ "name": event_name,
-                              "quantity": "1",
-                              "unitPrice": @new_bill.amount * (-1)
-                            }]
-                            },
-              :currencyCode => "USD",
-              :paymentTerms => "DueOnReceipt" } })
+          invoice = invoice_api.create_invoice(email, event_name, unit_price)
 
           # Make API call & get response
-          @create_and_send_invoice_response = @api.create_and_send_invoice(@create_and_send_invoice)
+          invoice_response = invoice_api.send_invoice(invoice)
 
           # Access Response
-          if @create_and_send_invoice_response.success?
-            @new_bill.update_attribute(:paypal_id, @create_and_send_invoice_response.invoiceID)
+          if invoice_response.success?
+            @new_bill.update_attribute(:paypal_id, invoice_response.invoiceID)
             @new_bill.save
             send_email(@new_bill.paypal_id, email)
             # p "yes"
-
-            # p @create_and_send_invoice_response
-            # @create_and_send_invoice_response.invoiceID
-            # @create_and_send_invoice_response.invoiceNumber
-            # @create_and_send_invoice_response.invoiceURL
-            # @create_and_send_invoice_response.totalAmount
+            #
+            # p invoice_response
+            # invoice_response.invoiceID
+            # invoice_response.invoiceNumber
+            # invoice_response.invoiceURL
+            # invoice_response.totalAmount
           else
-            @create_and_send_invoice_response.error
+            invoice_response.error
           end # close response loop
         end # close API call
-      end # close IF loop
+      end # close duplicate invoice loop
     end # close create bill loop
   end # close generate_invoices method
 
@@ -140,10 +118,10 @@ class Event < ApplicationRecord
         email = creditor.email
 
         # Set up PayPal client
-        @api = PayPal::SDK::REST.set_config(
-              :mode => "sandbox",
-              :client_id => ENV['CLIENT_ID'],
-              :client_secret => ENV['CLIENT_SECRET'])
+        PayPal::SDK::REST.set_config(
+          :mode => "sandbox",
+          :client_id => ENV['CLIENT_ID'],
+          :client_secret => ENV['CLIENT_SECRET'])
 
         # Build request object
         @payout = Payout.new(

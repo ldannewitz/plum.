@@ -43,7 +43,6 @@ class Bill < ApplicationRecord
 
       # Access Response
       if @get_invoice_details_response.success?
-        # p @get_invoice_details_response
         if @get_invoice_details_response.paymentDetails.paypalPayment.amount == self.amount * (-1)
           self.update_attribute(:satisfied?, true)
           self.save
@@ -53,7 +52,7 @@ class Bill < ApplicationRecord
           # @get_invoice_details_response.refundDetails
           # @get_invoice_details_response.invoiceURL
         end
-      else
+      else # no api response
         @get_invoice_details_response.error
       end
     end
@@ -85,6 +84,5 @@ class Bill < ApplicationRecord
   #     @get_transaction_details_response.Errors
   #   end
   # end
-
 
 end

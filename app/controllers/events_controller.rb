@@ -14,6 +14,7 @@ class EventsController < ApplicationController
     if @expense.save
       render json: @expense, status: :created, location: @expense
     else
+      p @expense.errors
       render json: @expense.errors, status: :unprocessable_entity
     end
   end
